@@ -4,11 +4,12 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http');
 var db = require('./config/db');
 
 var routes = require('./routes/index');
 var search = require('./routes/search')
-
+var io = require('socket.io')(80)
 var app = express();
 
 // view engine setup
@@ -32,11 +33,23 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.listen(80,function(req,res){
+app.listen(3000,function(){
     console.log('Server start')
 })
 
+
 /// error handlers
+var myErrorHandler = function(err, req, res, next){
+    console.log('j')
+    if(err){
+        res.render('error',{
+            message : err.message,
+            err : err
+        })
+    }
+    next();
+};
+
 
 // development error handler
 // will print stacktrace
