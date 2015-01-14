@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.listen(.listen(process.env.PORT || 5000))
+app.listen(process.env.PORT || 5000);
 
 
 /// error handlers
