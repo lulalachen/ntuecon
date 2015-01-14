@@ -9,7 +9,6 @@ var db = require('./config/db');
 
 var routes = require('./routes/index');
 var search = require('./routes/search')
-var io = require('socket.io')(80)
 var app = express();
 
 // view engine setup
@@ -33,9 +32,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.listen(3000,function(){
-    console.log('Server start')
-})
+app.listen(3000)
 
 
 /// error handlers
