@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.listen(1337,function(req,res){
+app.listen(80,function(req,res){
     console.log('Server start')
 })
 
