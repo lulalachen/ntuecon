@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+	<title>Information</title>
+	<link rel="stylesheet" href="/stylesheets/bootstrap.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<script src="/javascripts/jquery.min.js"></script>
+	<link rel="stylesheet" href="/stylesheets/semantic.css">
+	<link rel="text/javascript" href="/javascripts/semantic.js">
+	<style>
+		
+	</style>
+</head>
+<body>
+	
+
+<div class="pusher">
+
+	<div class="ui grid" style="padding-top:20px">
+
+		<div class="column three wide centered center aligned">
+			<h1><span class="fa fa-anchor"></span> &nbsp;Info Page</h1>
+			<h3><span class="fa fa-star"></span> &nbsp;Hello, Lulalachen!</h3>
+			<a href="/">首頁</a>
+		</div>
+				
+
+		<!-- LOCAL INFORMATION -->
+		<div class="ui grid centered">
+		<div class="three wide column">
+
+			<div class="ui card">
+				<div class="image">
+					<img src="http://graph.facebook.com/lulala123/picture?type=large" >
+				</div>
+			    <div class="content">
+    				<a class="header">Name</a>
+    				<div class="description">
+    					<span calss="description"> Description</span>
+    				</div>
+    				<div class="meta">
+	      				<span class="date"></span><br>
+    				</div>
+			    </div>
+				<div class="extra content" >
+					<a class="btn btn-primary" id="edit" href="#"><p style="color:white">Edit Info</p></a>
+				</div>
+			</div>
+			<div class="ui toggle checkbox">
+			  <input type="checkbox" id="facebook">
+			  <label for="facebook">Facebook Info</label>
+			</div>
+
+
+			<script>
+				var checkbox = document.getElementById('facebook');
+				checkbox.onchange = function(){
+					if(this.checked){
+						$('#fbcolumn').addClass('well')
+						$('#fbcolumn').removeClass('hidden')
+					}else{
+						$('#fbcolumn').addClass('hidden')
+						$('#fbcolumn').removeClass('well')
+					}
+				}
+			</script>
+		</div>
+
+		<div class="eleven wide column">
+			<div class="ui grid">
+				<div class="five wide column" style="padding-top:0px">
+					<h3>
+						<i class="ui icon photo"></i>&nbsp;&nbsp;團拍相關
+					</h3>
+						
+							<table class="ui blue table collapsing" >
+								<thead>
+								    <tr>
+										<th class="six wide">項目</th>
+										<!-- <th>Tags</th> -->
+										<th class="five wide">數量</th>
+										<th class="five wide">費用</th>
+								    </tr>
+							  	</thead>
+							  	<tbody>
+								    <tr>
+								      <td class="collapsing">團拍費用</td>
+								      <td></td>
+								      <td></td>
+								    </tr>
+								    <tr>
+								      <td class="collapsing">照片費用</td>
+								      <td></td>
+								      <td></td>
+								    </tr>
+								    <tr>
+								      <td class="collapsing">團拍夾</td>
+								      <td><i class="large green checkmark icon"></i></td>
+								      <td></td>
+								    </tr>
+								    <tr>
+								      <td class="collapsing">加洗照片</td>
+								      <td><i class="large green checkmark icon"></i></td>
+								      <td></td>
+								    </tr>
+								    <tr>
+								      <td class="collapsing">購買電子檔</td>
+								      <td></td>
+								      <td></td>
+								    </tr>
+								    <tr class="positive">
+								      <td class="collapsing">小計</td>
+								      <td></td>
+								      <td></td>
+								    </tr>
+							  	</tbody>
+							</table>	
+					</div>
+					<div class="five wide column" style="padding-top:0px">
+						<h3>
+							<i class="ui icon book"></i>&nbsp;&nbsp;畢冊相關
+						</h3>
+							
+						<table class="ui blue table collapsing" >
+							<thead>
+							    <tr>
+									<th class="six wide">項目</th>
+									<!-- <th>Tags</th> -->
+									<th class="five wide">數量</th>
+									<th class="five wide">費用</th>
+							    </tr>
+						  	</thead>
+						  	<tbody>
+							    <tr>
+							      <td class="collapsing">校冊</td>
+							      <td></td>
+							      <td></td>
+							    </tr>
+							    <tr>
+							      <td class="collapsing">班冊</td>
+							      <td></td>
+							      <td></td>
+							    </tr>
+							    <tr>
+							      <td class="collapsing">合購優惠<i class="icon info small very" id="discount1"></i></td>
+							      <td><i class="large green checkmark icon"></i></td>
+							      <td></td>
+							    </tr>
+							    <tr>
+							      <td class="collapsing">預購禮</td>
+							      <td><i class="large green checkmark icon"></i></td>
+							      <td></td>
+							    </tr>
+						  	</tbody>
+						</table>	
+					</div>
+					
+					<div class="five wide column" style="padding-top:0px">
+						<h3>
+							<i class="ui icon inbox"></i>&nbsp;&nbsp;繳交資料
+						</h3>
+							
+								<table class="ui blue table collapsing" >
+									<thead>
+									    <tr>
+											<th class="six wide">項目</th>
+											<!-- <th>Tags</th> -->
+											<th class="five wide">數量</th>
+											<th class="five wide">費用</th>
+									    </tr>
+								  	</thead>
+								  	<tbody>
+									    <tr>
+									      <td class="collapsing">校冊個人照片</td>
+									      <td></td>
+									      <td></td>
+									    </tr>
+									    <tr>
+									      <td class="collapsing">班冊個人照片</td>
+									      <td></td>
+									      <td></td>
+									    </tr>
+									    <tr>
+									      <td class="collapsing">團體照片<i class="icon info small very" id="info"></i></td>
+									      <td><i class="large green checkmark icon"></i></td>
+									      <td></td>
+									    </tr>
+
+								  	</tbody>
+								</table>	
+						</div>
+					</div>
+				
+			</div>
+		</div>
+			<div class="sixteen wide column centered center aligned">
+				<p>- Econ Graguates 2015 -</p>
+</div>
+		</div>
+
+
+
+	</div>
+</div>
+
+</body>
+<script>
+
+
+$('.modal')
+	.modal('attach events', 'test', 'show')
+;
+$('#btn').click(function(){
+	$('.text-center').append("poka")
+	$('.modal').modal('show')
+})
+</script>
+</html>
