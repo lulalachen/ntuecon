@@ -10,6 +10,6 @@ var UserData = new Schema({
 
 
 var UserData = mongoose.model('UserData',UserData);
-mongoose.connect('mongodb://localhost/econ',function(req,res){
+mongoose.connect('mongodb://admin:admin@ds060977.mongolab.com:60977/econgrad',function(req,res){
 	console.log('DB connect')
 })
