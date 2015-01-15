@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.index);
-app.get('/search', search.search);
+//app.get('/search', search.search);
 app.post('/search',search.search);
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
