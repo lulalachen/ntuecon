@@ -116,14 +116,19 @@
 
 				<!-- Footer -->
 					<footer id="footer">
-						<i class="circular icon inverted facebook"></i>
-						<a href="mailto:lulalachen@gmail.com"><i class="circular icon inverted mail" ></i></a>
+
+						<a href="https://www.facebook.com/ntuECONb00"><i class="circular icon inverted facebook"></i></a>
+						<a href="mailto:b00303a@gmail.com"><i class="circular icon inverted mail" ></i></a>
 					</footer>
 				
 			</div>
 		</div>
 		<script>
-
+			$('i').hover(function(){
+				$(this).removeClass('inverted');
+			},function(){
+				$(this).addClass('inverted');
+			})
 
 			$('.sidebar').first()
 			  .sidebar('attach events', '.sidebar.icon')
