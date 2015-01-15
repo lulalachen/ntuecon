@@ -87,16 +87,12 @@
 				<!-- Header -->
 					<header id="header">
 						
-						<h1>台大經濟系畢業生資訊平台</h1>
-						<p><a href="/search">團拍資訊</a> &nbsp;&cross;&nbsp; <a href="#">畢冊資訊</a> &nbsp;&cross;&nbsp; <a href="#">畢聯會訊息</a></p>
+						<h1><%= message %></h1>
 						<nav>
-
-
 							<form action="/search" method="post" id='getId'>
 								<div class="ui icon input">
 									<input type="text" placeholder="請輸入學號或姓名" name='input'>
 									<i class="circular search icon" id='submit'></i>
-
 								</div>
 								<script>
 									$("#submit").click(function(){

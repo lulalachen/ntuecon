@@ -25,11 +25,13 @@ exports.search = function(req,res){
 		*/
 	}, function sheetReady(err, spreadsheet) {
 	    if(err) throw err;
+	    console.log(req.body.input)
 
 	    spreadsheet.receive(function(err, rows, info) {
 			if(err) throw err;
 			var input = req.body.input;
-			
+			input = input.toUpperCase();
+			console.log('Input: '+input)			
 			for (i = 1; i < info.totalRows; i++) {
 				if( rows[i][1] === input || rows[i][2] === input ){
 					// Search for specific person
@@ -59,7 +61,9 @@ exports.search = function(req,res){
 					//Nothing keep searching
 				}
 	  		}
-	  		res.render('/')
+	  		res.render('wrong',{
+	  			message : '沒有這個人唷！'+'\n再試試吧～'
+	  		})
     });
 
   });
