@@ -8,7 +8,8 @@ var http = require('http');
 var db = require('./config/db');
 
 var routes = require('./routes/index');
-var search = require('./routes/search')
+var search = require('./routes/search');
+//var data = require('./routes/data');  //testing only
 var app = express();
 
 // view engine setup

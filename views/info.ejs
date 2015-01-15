@@ -20,51 +20,14 @@
 
 		<div class="column three wide centered center aligned">
 			<h1><i class="ui icon anchor"></i> &nbsp;Info Page</h1>
-			<h3><i class="ui icon star"></i> &nbsp;Hello, Lulalachen!</h3>
-			<a href="/">首頁</a>
+			<h3><i class="ui icon star"></i> &nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h3>
+			<a href="/"><button class="ui button">首頁</button></a>
 		</div>
 				
 
 		<!-- LOCAL INFORMATION -->
 		<div class="ui grid centered">
-		<div class="three wide column">
 
-			<div class="ui card">
-				<div class="image">
-					<img src="http://graph.facebook.com/lulala123/picture?type=large" >
-				</div>
-			    <div class="content">
-    				<a class="header">Name</a>
-    				<div class="description">
-    					<span calss="description">Description</span>
-    				</div>
-    				<div class="meta">
-	      				<span class="date"></span><br>
-    				</div>
-			    </div>
-				<div class="extra content" >
-					<a class="btn btn-primary" id="edit" href="#"><p style="color:white">Edit Info</p></a>
-				</div>
-			</div>
-			<div class="ui toggle checkbox">
-			  <input type="checkbox" id="facebook">
-			  <label for="facebook">Facebook Info</label>
-			</div>
-
-
-			<script>
-				var checkbox = document.getElementById('facebook');
-				checkbox.onchange = function(){
-					if(this.checked){
-						$('#fbcolumn').addClass('well')
-						$('#fbcolumn').removeClass('hidden')
-					}else{
-						$('#fbcolumn').addClass('hidden')
-						$('#fbcolumn').removeClass('well')
-					}
-				}
-			</script>
-		</div>
 
 		<div class="eleven wide column">
 			<div class="ui grid">
@@ -176,15 +139,31 @@
 								  	<tbody>
 									    <tr>
 									      <td class="collapsing">校冊個人照片</td>
-									      <td class="center aligned"></td>
+									      <td class="center aligned">
+									      	<% if (yearBookPhoto === '合格'){%>
+									      		<i class="large green checkmark icon"></i>
+									      	<% } else {%>
+									      		<i class="large red close icon"></i>
+									      	<% } %>
+									      </td>
 									    </tr>
 									    <tr>
 									      <td class="collapsing">班冊個人照片</td>
-									      <td class="center aligned"></td>
+									      <td class="center aligned">
+									      	<% if (classBookPhoto === '合格'){%>
+									      		<i class="large green checkmark icon"></i>
+									      	<% } else {%>
+									      		<i class="large red close icon"></i>
+									      	<% } %>
+									      </td>
 									    </tr>
 									    <tr>
 									      <td class="collapsing">團體照片<i class="icon info small very" id="info"></i></td>
-									      <td class="center aligned"><i class="large green checkmark icon"></i></td>
+									      <td class="center aligned">
+									      	<% if (groupShot)%>
+									      	<i class="large green checkmark icon"></i>
+									      	<% %>
+									      </td>
 									      
 									    </tr>
 									    <tr class="positive">
