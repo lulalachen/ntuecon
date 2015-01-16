@@ -99,9 +99,9 @@
 								      <td class="collapsing">團拍費用</td>
 								      <td class="center aligned">
 								      	<% if(groupShot ==='有參與'){%>
-								      		<i class="large green checkmark icon"></i>
+								      		<%= gradBookQuantity %>
 								      	<% }else{ %>
-								      		<i class="large red checkmark icon"></i>
+								      		<i class="large red close icon"></i>
 								      	<% } %>
 								      </td>
 								      <td class="center aligned">
@@ -116,9 +116,9 @@
 								      <td class="collapsing">照片費用</td>
 								      <td class="center aligned">
 								      	<% if(groupShotBuy ==='照片＆團拍夾' || groupShotBuy === '照片'){%>
-								      		<i class="large green checkmark icon"></i>
+								      		<%= gradBookQuantity %>
 								      	<% }else{ %>
-								      		<i class="large red checkmark icon"></i>
+								      		<i class="large red close icon"></i>
 								      	<% } %>
 								      </td>
 								      <td class="center aligned">
@@ -133,9 +133,9 @@
 								      <td class="collapsing">團拍夾</td>
 								      <td class="center aligned">
 								      	<% if(groupShotBuy ==='照片＆團拍夾' || groupShotBuy === '團拍夾'){%>
-								      		<i class="large green checkmark icon"></i>
+								      		<%= gradBookQuantity %>
 								      	<% }else{ %>
-								      		<i class="large red checkmark icon"></i>
+								      		<i class="large red close icon"></i>
 								      	<% } %>
 								      </td>
 								      <td class="center aligned">
@@ -174,7 +174,27 @@
 								      <td></td>
 								    </tr>
 							  	</tbody>
-							</table>	
+							</table>
+							<% if (!gradBookPay==='o') { %>
+							<div class="ui negative message">
+								<i class="close icon"></i>
+							  <div class="header">
+							    尚未繳費
+							  </div>
+							  <p>請儘速繳款</p>
+							</div>						
+							<% } else if (gradBook ==='未購買') {%>		
+							<div class="ui message">
+								<i class="close icon"></i>
+							  <div class="header">
+							    您未選購畢業紀念冊喔！
+							  </div>
+							</div>		
+							<% } %>
+							<script>
+							$('.message .close').on('click', function() {
+							  $(this).closest('.message').fadeOut();
+							});</script>
 							<% } else { %>
 								<h2>Please fill in the form！</h2>
 							<% } %>
@@ -248,7 +268,7 @@
 								      	<% if(gradBook === '套組＆預購禮') { %>
 								      		<i class="large green checkmark icon"></i>
 								      	<% } else { %>
-								      		<i class="large red checkmark icon"></i>
+								      		<i class="large red close icon"></i>
 								      	<% } %>
 								      </td>
 								      <td>
