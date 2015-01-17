@@ -65,7 +65,6 @@
 			<div class="ui centered aligned">
 				<h1 class="ui header center aligned"><i class="ui icon anchor"></i> &nbsp;NTU Economics</h1>
 				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
-				<!--<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#myModal">Click</button>-->
 			</div>
 		</div>
 		<script>
@@ -118,7 +117,6 @@
 						<h3>
 							<i class="ui icon photo"></i>&nbsp;&nbsp;團拍相關
 						</h3>
-						<% if (groupShotBuy === '照片＆團拍夾' || groupShotBuy === '照片' ) {%>
 						<table class="ui blue table collapsing" >
 							<thead>
 							    <tr>
@@ -133,7 +131,7 @@
 							      <td class="collapsing">團拍費用</td>
 							      <td class="center aligned">
 							      	<% if(groupShot ==='有參與'){%>
-							      		<%= gradBookQuantity %>
+							      		1
 							      	<% }else{ %>
 							      		0
 							      	<% } %>
@@ -150,7 +148,7 @@
 							      <td class="collapsing">照片費用</td>
 							      <td class="center aligned">
 							      	<% if(groupShotBuy ==='照片＆團拍夾' || groupShotBuy === '照片'){%>
-							      		<%= gradBookQuantity %>
+							      		1
 							      	<% }else{ %>
 							      		0
 							      	<% } %>
@@ -167,7 +165,7 @@
 							      <td class="collapsing">團拍夾</td>
 							      <td class="center aligned">
 							      	<% if(groupShotBuy ==='照片＆團拍夾' || groupShotBuy === '團拍夾'){%>
-							      		<%= gradBookQuantity %>
+							      		1
 							      	<% }else{ %>
 							      		0
 							      	<% } %>
@@ -182,20 +180,32 @@
 							    </tr>
 							    <tr>
 							      <td class="collapsing">加洗照片</td>
-							      <td></td>
 							      <td class="center aligned">
-							      	<% if(groupShotAdd ){%>
-							      		$ ??
+							      	<% if (groupShotAdd != '') { %>
+							      		<%= groupShotAdd %>
+							      	<% } else { %>
+										0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotAdd != '' ){%>
+							      		$ <%= groupShotTotal %>
 							      	<% }else{ %>
-							      		$ ??
+							      		$ 0
 							      	<% } %>
 							      </td>
 							    </tr>
 							    <tr>
 							      <td class="collapsing">加洗優惠</td>
-							      <td></td>
 							      <td class="center aligned">
-							      	<% if(groupShotAdd ){%>
+							      	<% if(groupShotAdd != '') { %>
+							      		<%= groupShotAdd %>
+							      	<% } else { %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotAdd != ''){%>
 							      		$ ??
 							      	<% }else{ %>
 							      		$ ??
@@ -204,53 +214,142 @@
 							    </tr>
 							    <tr>
 							      <td class="collapsing">購買電子檔</td>
-							      <td></td>
 							      <td class="center aligned">
-							      	<% if(groupShotEPhoto){%>
-							      		$ ??
+							      	<% if(groupShotEPhoto != ''){%>
+							      		<%= groupShotEPhoto %>
 							      	<% }else{ %>
-							      		$ ??
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotEPhoto != ''){%>
+							      		<%= groupShotEPhotoTotal %>
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="collapsing">合成費用</td>
+							      <td class="center aligned">
+							      	<% if(groupShotPS != ''){%>
+							      		<%= groupShotPS %>
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotPS != ''){%>
+							      		<%= groupShotPS %>
+							      	<% }else{ %>
+							      		0
 							      	<% } %>
 							      </td>
 							    </tr>
 							    <tr class="positive">
 							      <td class="collapsing">小計</td>
-							      <td class="center aligned"></td>
+							      <td class="center aligned">
+							      <!--	<%= groupTotal %> -->
+							      </td>
 							      <td></td>
 							    </tr>
 						  	</tbody>
 						</table>
-
-						<% if (!gradBookPay==='o') { %>
-						<div class="ui negative message">
-							<i class="close icon"></i>
-						  <div class="header">
-						    尚未繳費
-						  </div>
-						  <p>請儘速繳款</p>
-						</div>						
-						<% } else if (gradBook ==='未購買') {%>		
-						<div class="ui message">
-							<i class="close icon"></i>
-						  <div class="header">
-						    您未選購畢業紀念冊喔！
-						  </div>
-						  <p>請儘速繳款</p>
-						</div>		
+						
+						<!-- 團拍填表訊息 -->
+						<% if(groupShotBuy === '應選購') { %>
+							<div class="ui negative message">
+								<i class="close icon"></i>
+							  <div class="header">
+							    您必須選購「照片」或「照片＆團拍夾」
+							  </div>
+							  <button class="ui button" id="form1btn">請點我填表</button>
+							  <button class="ui red button" id="form1btnclose">關掉表單</button>
+							</div>			
+							<script>
+								$('#form1btn').click(function(){
+									$('#form1').removeClass('hidden')
+								})
+								$('#form1btnclose').click(function(){
+									$('#form1').addClass('hidden')
+								})
+							</script>
+						<% } else { %>
+							<div class="ui message">
+								<i class="close icon"></i>
+							  <div class="header">
+							    您要加洗或購買電子檔嗎？
+							  </div>
+							  <button class="ui button" id="form2btn">請點我填表</button>
+							  <button class="ui red button" id="form2btnclose">關掉表單</button>
+							</div>			
+							<script>
+								$('#form2btn').click(function(){
+									$('#form2').removeClass('hidden')
+								})
+								$('#form2btnclose').click(function(){
+									$('#form2').addClass('hidden')
+								})
+							</script>
 						<% } %>
-						<% if (xxxxx) {%>
-								<script>
-								$('.close.icon').click(function(){
+						<!-- 團拍填表訊息 -->
+						
+					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+						<!-- 團拍繳費訊息 -->
+
+						<% if( (groupShotBuy === '照片＆團拍夾' || groupShotBuy === '照片') && groupShotPay != 'o') { %>
+							<!-- 填表＆未繳費 -->
+
+							<% if( (groupShotAdd != '' || groupShotEPhoto != '') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
+							<!-- 填表＆未繳費 & 加洗or電子未繳費 -->
+								<div class="ui message">
+									<i class="close icon"></i>
+								  <div class="header">
+								    您還有 <%=groupShotTotal%> + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
+
+								  </div>
+								  <div class="content">
+								  	<h4>《匯款資訊》</h4>
+								  	<p>帳號：154200399235 </p>
+									<p>戶名：陳泰宇</p>
+									<p>華南銀行台大分行</p>
+									<h4>《面交》</h4>
+								  	<a href="http://www.facebook.com/lulala123"><i class="ui facebook icon"></i>Lulalachen</a>
+								  </div>
+								</div>			
+							<% } %>
+						<% } else { %>
+							<% if( (groupShotAdd != '' || groupShotEPhoto != '') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
+								<!-- 填表＆已繳費 & 加洗or電子未繳費 -->
+									<div class="ui message">
+										<i class="close icon"></i>
+									  <div class="header">
+									    您還有 <%=groupShotTotal%> + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
+
+									  </div>
+									  <div class="content">
+									  	<h4>《匯款資訊》</h4>
+									  	<p>帳號：154200399235 </p>
+										<p>戶名：陳泰宇</p>
+										<p>華南銀行台大分行</p>
+										<h4>《面交》</h4>
+									  	<a href="http://www.facebook.com/lulala123"><i class="ui facebook icon"></i>Lulalachen</a>
+									  </div>
+									</div>			
+							<% } %>
+
+						<% } %>
+						<!-- 團拍繳費訊息 -->
+
+						<script>
+							$('.close.icon').click(function(){
 									alert('想逃啊！快交錢！！！！')
 								})
-								$('.message .close').on('click', function() {
-								  $(this).closest('.message').fadeOut();
-								});</script>
-						<% } else  { %>
-							<h2>您尚未填寫購買團拍照表單</h2>
-							<button class="ui button" id="groupPhoto">我要填表單</button>
-						<% } %>
-						<script>
+							$('.message .close').on('click', function() {
+							  $(this).closest('.message').fadeOut();
+							});						
+
 							$('#groupPhoto').click(function(){
 								$('#form').removeClass('hidden')
 							})
@@ -343,6 +442,30 @@
 								    </tr>
 						  	</tbody>
 						</table>	
+
+
+						<!-- 畢冊未繳費-->
+						<% if(gradBookPay === 'x' ) { %>
+							<div class="ui message">
+								<i class="close icon"></i>
+							  <div class="header">
+							    您還有 <%=gradBookTotal%> 未繳納
+							  </div>
+							  <div class="content">
+							  	<h4>《匯款資訊》</h4>
+							  	<p>帳號：347540290460 </p>
+								<p>銀行代號：822</p>
+								<p>中國信託銀行公館分行</p>
+							  </div>
+							</div>								
+						<% } %>
+						<script>
+							$('.message .close').on('click', function() {
+								$(this).closest('.message').fadeOut();
+							});			
+						</script>
+						<!-- 畢冊未繳費-->
+
 					</div>
 					
 					<div class="five wide column" style="padding-top:0px">
@@ -392,13 +515,31 @@
 							    </tr>
 						  	</tbody>
 						</table>	
+						<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#myModal">按我上傳資料</button>
 					</div>
+
+					<script>
+						var password = 'iloveecon'
+					</script>
 				</div>
-				<div class="ui grid  hidden" id="form">
+
+
+
+
+				<div class="ui grid hidden" id="form1">
 					<div class="eight wide column">
 						<iframe src="https://docs.google.com/forms/d/1_T_aG8UEJiRKGoniVyTchOM8Dp6oDFq_n4MHKFxnreM/viewform?c=0&w=1" frameborder="0" width="770px" height="720px"></iframe>
 					</div>
 				</div>
+				<div class="ui grid hidden" id="form2">
+					<div class="eight wide column">
+						<iframe src="http://goo.gl/forms/CdZf1TXEiX" frameborder="0" width="770px" height="720px"></iframe>
+					</div>
+				</div>
+
+
+
+
 				<div class="ui grid centered">
 					<div class="eight wide column">
 
