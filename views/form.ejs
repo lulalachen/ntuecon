@@ -40,7 +40,7 @@
 		<!-- LOCAL INFORMATION -->
 		<div class="ui grid centered" style="padding-top:10px">
 
-
+<%=name%>
 			<div class="ten wide column">
 				<div class="ui secondary pointing menu">
 				  	<a class=" item" href="/">
@@ -75,25 +75,50 @@
 				</div>
 				<div class="ui grid" style="padding-top:30px">
 					<div class="ui centered eight wide column">
+
 						<form action="/suggest" method="post" class="ui form">
-							<h4 class="ui dividing header">問題</h4>
-							  <div class="two fields">
+							<h1 class="ui dividing header">問題</h1>
 						        <div class="field">
-						          <input type="text" name="first-name" placeholder="名字">
+								   <label>姓名</label>
+						          <input type="text" name="name" placeholder="名字">
 						        </div>
-							    <div class="field">
-							      <label>Gender</label>
-							      <div class="ui selection dropdown">
-							        <input type="hidden" name="gender">
-							        <div class="default text">Gender</div>
-							        <i class="dropdown icon"></i>
-							        <div class="menu">
-							          <div class="item" data-value="male">Male</div>
-							          <div class="item" data-value="female">Female</div>
-							        </div>
-							      </div>
+						        <div class="field">
+								   <label>學號</label>
+						          <input type="text" name="student_id" placeholder="學號">
+						        </div>
+						        <div class="inline fields">
+								    <label for="subject">問題分類</label>
+								    <div class="field">
+								      <div class="ui radio checkbox">
+								        <input type="radio" name="subject" >
+								        <label>畢冊相關</label>
+								      </div>
+								    </div>
+								    <div class="field">
+								      <div class="ui radio checkbox">
+								        <input type="radio" name="subject" > 
+								        <label>團拍相關</label>
+								      </div>
+								    </div>
+								    <div class="field">
+								      <div class="ui radio checkbox">
+								        <input type="radio" name="subject" >
+								        <label>繳交資料</label>
+								      </div>
+								    </div>
+								    <div class="field">
+								      <div class="ui radio checkbox">
+								        <input type="radio" name="subject" checked="">
+								        <label>其他</label>
+								      </div>
+								    </div>
 							    </div>
-							  </div>
+						    	<div class="field">
+								    <label>你的建議</label>
+								    <input type="text" name="comment" name="comment"></input>
+							  	</div>
+							  	<input type="submit" class="ui button" value="送出">
+							  	<a href="/search"><button class="ui button red">Back</button></a>
 						</form>
 					</div>
 				</div>

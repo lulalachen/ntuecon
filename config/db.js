@@ -6,6 +6,7 @@ var Suggestion =new Schema({
 	name : String,
 	student_id : String,
 	title : String,
+	subject : Array,
 	comment : String,
 	Date : {type:Date,default:Date.now()}
 })
@@ -32,12 +33,11 @@ var Comment = new Schema({
 var Suggestion = mongoose.model('Suggestion',Suggestion);
 var Post = mongoose.model('Post',Post);
 var Comment = mongoose.model('Comment',Comment);
-
+/*
 mongoose.connect('mongodb://localhost/econgrad',function(){
 	console.log('Local DB connected')
 })
-/*
+*/
 mongoose.connect('mongodb://admin:admin@ds060977.mongolab.com:60977/econgrad',function(){
 	console.log("Remote DB connected");
 })
-*/

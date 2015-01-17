@@ -92,6 +92,8 @@ exports.search = function(req,res){
 
 var Suggestion =  mongoose.model("Suggestion");
 exports.suggest = function(req,res){
+	console.log(req.body.name);
+	console.log(req.param.name)
 	res.render('form',{
 		name : req.body.name
 	})
@@ -101,8 +103,9 @@ exports.suggestPost = function(req,res,next){
 	new Suggestion ({
 		name : req.body.name,
 		student_id : req.body.student_id,
+		subject : req.body.subject,
 		title : req.body.title,
-		commment : req.body.commment
+		comment : req.body.comment
 	}).save(function(err,suggest,count){
 		if(err) return next(err)
 
