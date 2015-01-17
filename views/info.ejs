@@ -208,9 +208,9 @@
 							      </td>
 							      <td class="center aligned">
 							      	<% if(groupShotAdd != ''){%>
-							      		$ ??
+							      		<%= groupShotTotal %>
 							      	<% }else{ %>
-							      		$ ??
+							      		0
 							      	<% } %>
 							      </td>
 							    </tr>
@@ -265,7 +265,7 @@
 							  <div class="header">
 							    您必須選購「照片」或「照片＆團拍夾」
 							  </div>
-							  <button class="ui button" id="form1btn" href="/#form1">請點我填表</button>
+							  <a href="#form1"><button class="ui button" id="form1btn">請點我填表</button></a>
 							  <button class="ui red button" id="form1btnclose">關掉表單</button>
 							</div>			
 							<script>
@@ -282,7 +282,7 @@
 							  <div class="header">
 							    您要加洗或購買電子檔嗎？
 							  </div>
-							  <button class="ui button" id="form2btn" href="/#form2">請點我填表</button>
+							  <a href="#form2"><button class="ui button" id="form2btn" >請點我填表</button></a>
 							  <button class="ui red button" id="form2btnclose">關掉表單</button>
 							</div>			
 							<script>
@@ -652,6 +652,20 @@
 	update();
 })();
 
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
 </script>
 
 </body>
