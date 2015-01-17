@@ -118,7 +118,7 @@
 						<h3>
 							<i class="ui icon photo"></i>&nbsp;&nbsp;團拍相關
 						</h3>
-						<% if (groupShotBuy === '照片＆團拍夾' || groupShotBuy === '照片') {%>
+						<% if (groupShotBuy === '照片＆團拍夾' || groupShotBuy === '照片' ) {%>
 						<table class="ui blue table collapsing" >
 							<thead>
 							    <tr>
@@ -220,6 +220,7 @@
 							    </tr>
 						  	</tbody>
 						</table>
+
 						<% if (!gradBookPay==='o') { %>
 						<div class="ui negative message">
 							<i class="close icon"></i>
@@ -237,11 +238,15 @@
 						  <p>請儘速繳款</p>
 						</div>		
 						<% } %>
-						<script>
-						$('.message .close').on('click', function() {
-						  $(this).closest('.message').fadeOut();
-						});</script>
-						<% } else { %>
+						<% if (xxxxx) {%>
+								<script>
+								$('.close.icon').click(function(){
+									alert('想逃啊！快交錢！！！！')
+								})
+								$('.message .close').on('click', function() {
+								  $(this).closest('.message').fadeOut();
+								});</script>
+						<% } else  { %>
 							<h2>您尚未填寫購買團拍照表單</h2>
 							<button class="ui button" id="groupPhoto">我要填表單</button>
 						<% } %>

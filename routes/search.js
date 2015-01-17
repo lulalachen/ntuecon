@@ -43,6 +43,7 @@ exports.search = function(req,res){
 						if( rows[i][1] === input || rows[i][2] === input ){
 							// Search for specific person
 							console.log('Hello ' + rows[i][2])
+							console.log(rows[i])
 							res.render('info',{
 								student_id 			: rows[i][1],
 								name 				: rows[i][2],
@@ -51,17 +52,22 @@ exports.search = function(req,res){
 								gradBook 			: rows[i][5],
 								gradBookQuantity 	: rows[i][6],	
 								gradBookPay			: rows[i][7],
-								yearBookPhoto		: rows[i][8],
-								classBookPhoto		: rows[i][9],
-								classBookGroupPhoto	: rows[i][10],
-								groupShot			: rows[i][11],
-								groupShotBuy		: rows[i][12],
-								groupShotPay		: rows[i][13],
-								groupShotAdd		: rows[i][14],
-								groupShotAddPay		: rows[i][15],
-								groupShotEPhoto		: rows[i][16],
-								groupShotEPhotoPay	: rows[i][17],
-								groupShotPS			: rows[i][18],
+								gradBookTotal		: rows[i][8],
+								yearBookPhoto		: rows[i][9],
+								classBookPhoto		: rows[i][10],
+								classBookGroupPhoto	: rows[i][11],
+								groupShot			: rows[i][12],
+								groupShotBuy		: rows[i][13],
+								groupShotPay		: rows[i][14],
+								groupShotTotal		: rows[i][15],
+								groupShotAdd		: rows[i][16],
+								groupShotAddPay		: rows[i][17],
+								groupShotAddTotal	: rows[i][18],
+								groupShotEPhoto		: rows[i][19],
+								groupShotEPhotoPay	: rows[i][20],
+								groupShotEPhotoTotal: rows[i][21],
+								groupShotPS			: rows[i][22],
+								groupTotal			: rows[i][23],
 								message : 'Hello' + rows[i][2]
 							})
 						}else{
