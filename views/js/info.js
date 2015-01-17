@@ -1,6 +1,6 @@
 angular.module('infoApp', [])
-.controller('arithCtrl', [
+.controller('ArithCtrl', [
 	'$scope',
-function(){
-	
+function($scope){
+	$scope.test = 'hello'
 }])

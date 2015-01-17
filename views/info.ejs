@@ -9,13 +9,13 @@
 	<link rel="text/javascript" href="/javascripts/semantic.js">
 	<link rel="stylesheet" href="/stylesheets/semantic.css">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
-    <script src="./js/info.js"></script>
+    <script src="/js/info.js"></script>
     <script src="/javascripts/countdown.js"></script>
 	<style>
 		
 	</style>
 </head>
-<body>
+<body ng-app="infoApp" ng-controller="ArithCtrl">
 <div class="ui test modal" id="test">
   <i class="close icon"></i>
   <div class="header">
@@ -59,9 +59,9 @@
 
 <div class="pusher">
 
-	<div class="ui grid centered" style="padding-top:50px">
+	<div class="ui grid centered" style="padding-top:30px">
 
-		<div class="ui grid center aligned" style="padding-top:50px">
+		<div class="ui grid center aligned" style="padding-top:20px">
 			<div class="ui centered aligned">
 				<h1 class="ui header center aligned"><i class="ui icon anchor"></i> &nbsp;NTU Economics</h1>
 				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
@@ -69,13 +69,10 @@
 			</div>
 		</div>
 		<script>
-
-
 			$("#click").click(function(){
 				console.log('click')
 				$('.test.modal').modal('show');				
 				console.log('click2')
-
 			})
 		</script>
 		
@@ -195,6 +192,17 @@
 							      </td>
 							    </tr>
 							    <tr>
+							      <td class="collapsing">加洗優惠</td>
+							      <td></td>
+							      <td class="center aligned">
+							      	<% if(groupShotAdd ){%>
+							      		$ ??
+							      	<% }else{ %>
+							      		$ ??
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
 							      <td class="collapsing">購買電子檔</td>
 							      <td></td>
 							      <td class="center aligned">
@@ -234,8 +242,14 @@
 						  $(this).closest('.message').fadeOut();
 						});</script>
 						<% } else { %>
-							<h2>Please fill in the form！</h2>
+							<h2>您尚未填寫購買團拍照表單</h2>
+							<button class="ui button" id="groupPhoto">我要填表單</button>
 						<% } %>
+						<script>
+							$('#groupPhoto').click(function(){
+								$('#form').removeClass('hidden')
+							})
+						</script>
 					</div>
 					<div class="five wide column" style="padding-top:0px">
 						<h3>
@@ -356,18 +370,18 @@
 							      	<% if (classBookPhoto === '合格'){%>
 							      		<i class="large green checkmark icon"></i>
 							      	<% } else {%>
-							      		<div class="item">
 							      		<i class="large red close icon"></i>
-							      		</div>
 							      	<% } %>
 							      </td>
 							    </tr>
 							    <tr>
 							      <td class="collapsing">團體照片<i class="icon info small very" id="info"></i></td>
 							      <td class="center aligned">
-							      	<% if (groupShot)%>
+							      	<% if (groupShot) {%>
 							      	<i class="large green checkmark icon"></i>
-							      	<% %>
+							      	<% }else{%>
+							      		<i class="large red close icon"></i>
+							      	<% } %>
 							      </td>
 							      
 							    </tr>
@@ -375,12 +389,16 @@
 						</table>	
 					</div>
 				</div>
-
+				<div class="ui grid  hidden" id="form">
+					<div class="eight wide column">
+						<iframe src="https://docs.google.com/forms/d/1_T_aG8UEJiRKGoniVyTchOM8Dp6oDFq_n4MHKFxnreM/viewform?c=0&w=1" frameborder="0" width="770px" height="720px"></iframe>
+					</div>
+				</div>
 				<div class="ui grid centered">
 					<div class="eight wide column">
 
 						  <div class="content">
-						    <h1 class="header">距離2015/06/13畢業典禮</h1>
+						    <h1 class="header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;距離&nbsp;2015&nbsp;/&nbsp;06&nbsp;/&nbsp;13&nbsp;畢業典禮</h1>
 						   		<div class="ui statistics">
 								  <div class="purple statistic">
 								    <div class="value" id="day">
