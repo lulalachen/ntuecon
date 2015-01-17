@@ -2,17 +2,21 @@
 <html>
 <head>
 	<title>Information</title>
-	<link rel="stylesheet" href="/stylesheets/bootstrap.css">
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<script src="/javascripts/jquery.min.js"></script>
-	<link rel="stylesheet" href="/stylesheets/semantic.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css">
 	<link rel="text/javascript" href="/javascripts/semantic.js">
+	<link rel="stylesheet" href="/stylesheets/semantic.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="./js/info.js"></script>
+    <script src="/javascripts/countdown.js"></script>
 	<style>
 		
 	</style>
 </head>
 <body>
-<div class="ui modal">
+<div class="ui test modal" id="test">
   <i class="close icon"></i>
   <div class="header">
     Modal Title
@@ -30,17 +34,51 @@
     <div class="ui button">OK</div>
   </div>
 </div>
+<!-- Button trigger modal -->
+<div class="container">
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	      </div>
+	      <form action="/suggest" method="post">
+				<input type="text" name="suggest" class="input"></input>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save changes</button>
+				</div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
+</div>
 
 <div class="pusher">
 
-	<div class="ui grid" style="padding-top:0px">
+	<div class="ui grid centered" style="padding-top:50px">
 
-		<div class="ui two column ten wide centered grid">
-			<h1><i class="ui icon anchor"></i> &nbsp;NTU Economics</h1>
-			<h4><i class="ui icon star"></i> &nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
+		<div class="ui grid center aligned" style="padding-top:50px">
+			<div class="ui centered aligned">
+				<h1 class="ui header center aligned"><i class="ui icon anchor"></i> &nbsp;NTU Economics</h1>
+				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
+				<!--<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#myModal">Click</button>-->
+			</div>
 		</div>
-				
+		<script>
 
+
+			$("#click").click(function(){
+				console.log('click')
+				$('.test.modal').modal('show');				
+				console.log('click2')
+
+			})
+		</script>
+		
 		<!-- LOCAL INFORMATION -->
 		<div class="ui grid centered" style="padding-top:10px">
 
@@ -189,6 +227,7 @@
 							  <div class="header">
 							    您未選購畢業紀念冊喔！
 							  </div>
+							  <p>請儘速繳款</p>
 							</div>		
 							<% } %>
 							<script>
@@ -346,12 +385,110 @@
 			</div>
 		</div>
 		<div class="ui grid centered">
+			<div class="eight wide column">
+				<div class="ui statistics">
+				  <div class="statistic">
+				    <div class="value" id="month">
+				      
+				    </div>
+				    <div class="label">
+				      Months
+				    </div>
+				  </div>
+				  <div class="statistic">
+				    <div class="value" id="day">
+				      
+				    </div>
+				    <div class="label">
+				      Days
+				    </div>
+				  </div>
+				  <div class="statistic">
+				    <div class="value" id="hour">
+				      
+				    </div>
+				    <div class="label">
+				      Hours
+				    </div>
+				  </div>
+				  <div class="statistic">
+				    <div class="value" id="minute">
+				      
+				    </div>
+				    <div class="label">
+				      Minutes
+				    </div>
+				  </div>
+				  <div class="statistic">
+				    <div class="value" id="second">
+				      
+				    </div>
+				    <div class="label">
+				      Second
+				    </div>
+				  </div>
+				</div>
+			</div>
 		<div class="sixteen wide column centered center aligned " style="padding-top:150px">
 				<p>- Econ Graduates 2015 -</p>
 		</div>
 		</div>
 	</div>
 </div>
+
+<script>
+(function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+ 
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); }, 
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+ 
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
+(function() {
+	function byId(id) {
+		return document.getElementById(id);
+	}
+	function update() {
+
+		var start = new Date(2015, 6, 13);
+
+		var month = byId('month'),
+			day = byId('day'),
+			hour = byId('hour'),
+			minute = byId('minute'),
+			second = byId('second');
+		var mm = countdown(start,null,countdown.MONTHS).months.toHTML();
+		console.log(mm)
+		month.innerHTML( mm )
+		/*
+		day.innerHTML( countdown(start,null,countdown.DAYS).toHTML() )
+		hour.innerHTML( countdown(start,null,countdown.HOURS).toHTML() )
+		minute.innerHTML( countdown(start,null,countdown.MINUTES).toHTML() )
+		second.innerHTML( countdown(start,null,countdown.SECONDS).toHTML() )
+*/
+		requestAnimationFrame(update);
+	}
+	update();
+})();
+
+</script>
 
 </body>
 

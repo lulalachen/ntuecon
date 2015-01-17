@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
-//var db = require('./config/db');
+var db = require('./config/db');
 
 var routes = require('./routes/index');
 var search = require('./routes/search');
@@ -22,10 +22,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views')))
 
 app.get('/', routes.index);
 app.get('/search', routes.reload);
 app.post('/search',search.search);
+app.get('/comment',routes.comment);
+app.get('/comment/posts', routes.getPosts);
+app.post('/comment/posts', routes.postPosts);
+app.get('/comment/posts/:id', routes.getPostsId);
+app.put('/comment/posts/:id/upvotes', routes.putPostsUpvotes);
+app.post('/comment/posts/:id/comments/', routes.postComments);
+app.put('/comment/posts/:id/comment/:id/upvotes', routes.putCommentsUpvotes);
+
+
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');

@@ -64,7 +64,7 @@
     -ms-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
     /* Set your background with this */
-    background: #348cb2 url("https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpf1/v/t34.0-12/10934268_761455853924121_1902744741_n.jpg?oh=9ccf107938a5d14ecd8d608e9a8b0e4c&oe=54B8C44D&__gda__=1421449629_9bd3f6c291fecbb8f3d306a7ce43ede7");
+    background: #348cb2 url("/images/cover.jpg");
     background-repeat: repeat-x;
     background-position: left;
     background-origin: 100px;
