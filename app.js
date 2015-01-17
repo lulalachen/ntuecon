@@ -35,6 +35,9 @@ app.put('/comment/posts/:id/upvotes', routes.putPostsUpvotes);
 app.post('/comment/posts/:id/comments/', routes.postComments);
 app.put('/comment/posts/:id/comment/:id/upvotes', routes.putCommentsUpvotes);
 
+app.get('/suggest',search.suggest);
+app.post('/suggest',search.suggestPost);
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

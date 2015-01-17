@@ -1,6 +1,5 @@
 var Spreadsheet = require('edit-google-spreadsheet');
 var mongoose = require('mongoose');
-var Price = mongoose.model('Price');
 
 
 exports.search = function(req,res){
@@ -89,4 +88,32 @@ exports.search = function(req,res){
 
 	}
 }
+
+
+var Suggestion =  mongoose.model("Suggestion");
+exports.suggest = function(req,res){
+	res.render('form',{
+		name : req.body.name
+	})
+}
+
+exports.suggestPost = function(req,res,next){
+	new Suggestion ({
+		name : req.body.name,
+		student_id : req.body.student_id,
+		title : req.body.title,
+		commment : req.body.commment
+	}).save(function(err,suggest,count){
+		if(err) return next(err)
+
+		console.log(suggest.name + "'s suggestion : " + suggest.commment + " Saved!")
+		res.redirect('/search')
+	})
+}
+
+
+
+
+
+
 

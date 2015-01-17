@@ -44,7 +44,10 @@
 			<div class="ten wide column">
 				<div class="ui secondary pointing menu">
 				  	<a class=" item" href="/">
-				    	<i class="home icon"></i> Home
+				    	<i class="home icon"></i> 首頁
+				  	</a>
+				  	<a class=" item" href="/suggest">
+				    	<i class="form icon"></i> 建議我們
 				  	</a>
 				  	<div class="right menu">
 				    	<div class="item">
@@ -208,13 +211,6 @@
 							      	<% } %>
 							      </td>
 							    </tr>
-							    <tr class="positive">
-							      <td class="collapsing">小計</td>
-							      <td class="center aligned">
-							      <!--	<%= groupTotal %> -->
-							      </td>
-							      <td></td>
-							    </tr>
 						  	</tbody>
 						</table>
 						
@@ -236,7 +232,7 @@
 									$('#form1').addClass('hidden')
 								})
 							</script>
-						<% } else if (groupShotEPhoto === '否' && groupShotAdd === '0') { %>
+						<% } else if (groupShotEPhoto === '否' && groupShotAdd === 0) { %>
 							<div class="ui message">
 								<i class="close icon"></i>
 							  <div class="header">
@@ -281,13 +277,13 @@
 								  </div>
 								</div>			
 							<% } %>
-						<% } else { %>
-							<% if( (groupShotAdd != '' || groupShotEPhoto != '') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
+						<% } else  { %>
+							<% if( (groupShotAdd != 0 || groupShotEPhoto != '否') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
 								<!-- 填表＆已繳費 & 加洗or電子未繳費 -->
 									<div class="ui message">
 										<i class="close icon"></i>
 									  <div class="header">
-									    您還有 <%=groupShotTotal%> + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
+									    您還有 $ 0 + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
 
 									  </div>
 									  <div class="content">
@@ -397,11 +393,6 @@
 							      	<% } %>
 							      </td>
 							    </tr>
-							    <tr class="positive">
-								      <td class="collapsing">小計</td>
-								      <td></td>
-								      <td></td>
-								    </tr>
 						  	</tbody>
 						</table>	
 
