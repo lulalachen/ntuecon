@@ -67,6 +67,43 @@
 				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
 				<!--<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#myModal">Click</button>-->
 			</div>
+			<div class="five wide column center aligned">
+				<h1>距離2015/06/13畢業典禮</h1>
+				<div class="ui statistics">
+				  <div class="statistic">
+				    <div class="value" id="day">
+				      
+				    </div>
+				    <div class="label">
+				      Days
+				    </div>
+				  </div>
+				  <div class="statistic">
+				    <div class="value" id="hour">
+				      
+				    </div>
+				    <div class="label">
+				      Hours
+				    </div>
+				  </div>
+				  <div class="statistic">
+				    <div class="value" id="minute">
+				      
+				    </div>
+				    <div class="label">
+				      Minutes
+				    </div>
+				  </div>
+				  <div class="statistic">
+				    <div class="value" id="second">
+				      
+				    </div>
+				    <div class="label">
+				      Second
+				    </div>
+				  </div>
+				</div>
+			</div>
 		</div>
 		<script>
 
@@ -385,50 +422,6 @@
 			</div>
 		</div>
 		<div class="ui grid centered">
-			<div class="eight wide column">
-				<div class="ui statistics">
-				  <div class="statistic">
-				    <div class="value" id="month">
-				      
-				    </div>
-				    <div class="label">
-				      Months
-				    </div>
-				  </div>
-				  <div class="statistic">
-				    <div class="value" id="day">
-				      
-				    </div>
-				    <div class="label">
-				      Days
-				    </div>
-				  </div>
-				  <div class="statistic">
-				    <div class="value" id="hour">
-				      
-				    </div>
-				    <div class="label">
-				      Hours
-				    </div>
-				  </div>
-				  <div class="statistic">
-				    <div class="value" id="minute">
-				      
-				    </div>
-				    <div class="label">
-				      Minutes
-				    </div>
-				  </div>
-				  <div class="statistic">
-				    <div class="value" id="second">
-				      
-				    </div>
-				    <div class="label">
-				      Second
-				    </div>
-				  </div>
-				</div>
-			</div>
 		<div class="sixteen wide column centered center aligned " style="padding-top:150px">
 				<p>- Econ Graduates 2015 -</p>
 		</div>
@@ -474,15 +467,13 @@
 			hour = byId('hour'),
 			minute = byId('minute'),
 			second = byId('second');
-		var mm = countdown(start,null,countdown.MONTHS).months.toHTML();
-		console.log(mm)
-		month.innerHTML( mm )
-		/*
-		day.innerHTML( countdown(start,null,countdown.DAYS).toHTML() )
-		hour.innerHTML( countdown(start,null,countdown.HOURS).toHTML() )
-		minute.innerHTML( countdown(start,null,countdown.MINUTES).toHTML() )
-		second.innerHTML( countdown(start,null,countdown.SECONDS).toHTML() )
-*/
+		
+		//month.innerHTML = countdown(start,null).months;
+		day.innerHTML = countdown(start,null,countdown.DAYS).days;
+		hour.innerHTML = countdown(start,null).hours;
+		minute.innerHTML = countdown(start,null).minutes;
+		second.innerHTML = countdown(start,null,countdown.SECOND,1).seconds;
+
 		requestAnimationFrame(update);
 	}
 	update();

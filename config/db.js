@@ -28,11 +28,11 @@ var Comment = new Schema({
 var Post = mongoose.model('Post',Post);
 var Comment = mongoose.model('Comment',Comment);
 var Price = mongoose.model('Price',Price);
-
+/*
 mongoose.connect('mongod://localhost/econgrad',function(){
 	console.log('Local DB connected')
 })
-
+*/
 /*
 mongoose.connect('mongodb://admin:admin@ds060977.mongolab.com:60977/econgrad',function(){
 	console.log("Remote DB connected");
