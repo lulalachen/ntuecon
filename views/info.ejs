@@ -9,8 +9,10 @@
 	<link rel="text/javascript" href="/javascripts/semantic.js">
 	<link rel="stylesheet" href="/stylesheets/semantic.css">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="t6dab94nlinm1c2"></script>
     <script src="/js/info.js"></script>
     <script src="/javascripts/countdown.js"></script>
+	<script src="/js/dropbox.js"></script>
 	<style>
 		
 	</style>
@@ -515,11 +517,13 @@
 							    </tr>
 						  	</tbody>
 						</table>	
-						<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#myModal">按我上傳資料</button>
+						<a href="https://dl.dropboxusercontent.com/s/deroi5nwm6u7gdf/advice.png" class="dropbox-saver">click</a>
 					</div>
 
 					<script>
-						var password = 'iloveecon'
+						$('#dropbox').click(function(){
+							client.authenticate();
+						})
 					</script>
 				</div>
 

@@ -49,23 +49,29 @@ exports.search = function(req,res){
 								name 				: rows[i][2],
 								cell 				: rows[i][3],
 								email				: rows[i][4],
+								
 								gradBook 			: rows[i][5],
 								gradBookQuantity 	: rows[i][6],	
 								gradBookPay			: rows[i][7],
 								gradBookTotal		: rows[i][8],
+								
 								yearBookPhoto		: rows[i][9],
 								classBookPhoto		: rows[i][10],
 								classBookGroupPhoto	: rows[i][11],
+								
 								groupShot			: rows[i][12],
 								groupShotBuy		: rows[i][13],
 								groupShotPay		: rows[i][14],
 								groupShotTotal		: rows[i][15],
+
 								groupShotAdd		: rows[i][16],
 								groupShotAddPay		: rows[i][17],
 								groupShotAddTotal	: rows[i][18],
+								
 								groupShotEPhoto		: rows[i][19],
 								groupShotEPhotoPay	: rows[i][20],
 								groupShotEPhotoTotal: rows[i][21],
+								
 								groupShotPS			: rows[i][22],
 								groupTotal			: rows[i][23],
 								message : 'Hello' + rows[i][2]
