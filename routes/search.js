@@ -42,7 +42,7 @@ exports.search = function(req,res){
 						if( rows[i][1] === input || rows[i][2] === input ){
 							// Search for specific person
 							console.log('Hello ' + rows[i][2])
-							console.log(rows[i])
+							console.log(rows)
 							res.render('info',{
 								student_id 			: rows[i][1],
 								name 				: rows[i][2],
