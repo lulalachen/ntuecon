@@ -319,7 +319,7 @@
 								  </div>
 								</div>			
 							<% } %>
-						<% } else  { %>
+						<% } else if (groupShotAdd != 0 || groupShotEPhoto != '否') { %>
 							<% if( (groupShotAdd != 0 || groupShotEPhoto != '否') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
 								<!-- 填表＆已繳費 & 加洗or電子未繳費 -->
 									<div class="ui message">
@@ -337,12 +337,12 @@
 									  </div>
 									</div>			
 							<% } else { %>
-								<div class="ui message">
+							<div class="ui message">
 									<div class="header">
 									    <i class="child icon"></i>繳費完成
 								    </div>
 								      <div class="description">感謝您的配合！</div>
-								</div>
+							</div>
 							<% } %>
 						<% } %>
 						<!-- 團拍繳費訊息 -->
@@ -450,19 +450,21 @@
 								<p>中國信託銀行公館分行</p>
 							  </div>
 							</div>								
+						<% }else if (gradBookPay === 'o') { %>
+							<div class="ui message">
+								<div class="header">
+								    <i class="child icon"></i>繳費完成
+							    </div>
+		 				        <div class="description">感謝您的配合！</div>
+							</div>
 						<% } %>
-						<script>
-							$('.message .close').on('click', function() {
-								$(this).closest('.message').fadeOut();
-							});			
-						</script>
 						<!-- 畢冊未繳費-->
 
 					</div>
 					
 					<div class="five wide column" style="padding-top:0px">
 						<h3>
-							<i class="ui icon inbox"></i>&nbsp;&nbsp;繳交資料
+							<a href=""><i class="ui icon inbox"></i>&nbsp;&nbsp;繳交資料</a>
 						</h3>
 							
 						<table class="ui blue table collapsing center aligned" >
