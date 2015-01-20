@@ -1,10 +1,12 @@
 var Spreadsheet = require('edit-google-spreadsheet');
 var mongoose = require('mongoose');
-
+var Suggestion = mongoose.model('Suggestion');
 
 exports.search = function(req,res){
 	if (req.body.input === 'admin'){
-		res.render('admin')
+		Suggestion.find(function(err, suggestion){
+			res.render('admin',{suggestion : suggestion})
+		})
 	}else{
 
 		Spreadsheet.load({
@@ -42,7 +44,7 @@ exports.search = function(req,res){
 						if( rows[i][1] === input || rows[i][2] === input ){
 							// Search for specific person
 							console.log('Hello ' + rows[i][2])
-							console.log(rows[i])
+							console.log(rows)
 							res.render('info',{
 								student_id 			: rows[i][1],
 								name 				: rows[i][2],
@@ -91,15 +93,9 @@ exports.search = function(req,res){
 
 
 var Suggestion =  mongoose.model("Suggestion");
-exports.suggest = function(req,res){
-	console.log(req.body.name);
-	console.log(req.param.name)
-	res.render('form',{
-		name : req.body.name
-	})
-}
 
 exports.suggestPost = function(req,res,next){
+	console.log('suggest Post')
 	new Suggestion ({
 		name : req.body.name,
 		student_id : req.body.student_id,
@@ -110,7 +106,8 @@ exports.suggestPost = function(req,res,next){
 		if(err) return next(err)
 
 		console.log(suggest.name + "'s suggestion : " + suggest.commment + " Saved!")
-		res.redirect('/search')
+		//next()
+		res.redirect('/')
 	})
 }
 

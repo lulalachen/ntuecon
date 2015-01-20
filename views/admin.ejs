@@ -1,1 +1,86 @@
-<h1>噢！呱呱</h1>
+<html>
+	<head>
+		<script src="/javascripts/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script> 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css"></script> 
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">噢！呱呱！</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li><a href="/">Home<span class="sr-only">(current)</span></a></li>
+		        <li><a href="#">Link</a></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+		          <ul class="dropdown-menu" role="menu">
+		            <li><a href="#">Action</a></li>
+		            <li><a href="#">Another action</a></li>
+		            <li><a href="#">Something else here</a></li>
+		            <li class="divider"></li>
+		            <li><a href="#">Separated link</a></li>
+		            <li class="divider"></li>
+		            <li><a href="#">One more separated link</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		      
+
+		      
+		      <form class="navbar-form navbar-right" role="search" action="/search" method="post">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="請輸入學號或姓名" name="input">
+		        </div>
+		        <button type="submit" class="btn btn-default">Submit</button>
+		      </form>
+		      
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		      <script>
+		      	$('li').hover(function(){
+		      		$(this).addClass('active')
+		      	},function(){
+		      		$(this).removeClass('active')
+		      	})
+		      </script>
+
+		</nav>
+		<div class="container-fluid">
+			<section style="padding:10px;">
+		        <h2> Suggestion </h2>
+		            <table class="table table-condensed table-striped table-bordered table-hover">
+			            <thead class="span6"><tr><th>Users</th></tr></thead>
+			            <tbody>
+			                <tr>
+			                <td>Name</td>
+			                <td>Student ID</td>
+			                <td>Title</td>
+			                <td>Comment</td>
+			                <td>Create Time</td>
+			                </tr>
+			                <% suggestion.forEach( function (sug){ %>
+			                <tr>
+			                    <td> <%= sug.name %> </td> 
+			                    <td> <%= sug.student_id %></td>
+			                    <td> <%= sug.title %> </td>
+			                    <td> <%= sug.comment %> </td>
+			                    <td> <%= sug.Date %> </td>
+			                <% }); %>
+			            </tbody>
+		            </table>
+		    </section>
+        </div>
+	</body>
+</html>

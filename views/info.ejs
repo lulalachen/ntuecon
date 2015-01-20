@@ -19,23 +19,16 @@
 </head>
 <body ng-app="infoApp" ng-controller="ArithCtrl">
 
-<div class="pusher">
+<div class="pusher" id="top">
 
 	<div class="ui grid centered" style="padding-top:30px">
 
 		<div class="ui grid center aligned" style="padding-top:20px">
 			<div class="ui centered aligned">
-				<h1 class="ui header center aligned"><i class="ui icon anchor"></i> &nbsp;NTU Economics</h1>
+				<h1 class="ui header center aligned"><i class="ui icon student"></i> &nbsp;NTU Economics</h1>
 				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
 			</div>
 		</div>
-		<script>
-			$("#click").click(function(){
-				console.log('click')
-				$('.test.modal').modal('show');				
-				console.log('click2')
-			})
-		</script>
 		
 		<!-- LOCAL INFORMATION -->
 		<div class="ui grid centered" style="padding-top:10px">
@@ -46,7 +39,7 @@
 				  	<a class=" item" href="/">
 				    	<i class="home icon"></i> 首頁
 				  	</a>
-				  	<a class=" item" href="/suggest" >
+				  	<a class=" item" data-toggle="modal" data-target="#suggestionModal">
 				  		<input type="hidden" value="<%=name%>" name="name">
 				    	<i class="people icon"></i> 建議我們
 				  	</a>
@@ -77,6 +70,60 @@
 				    	</div>
 					</div>
 				</div>
+
+				<!-- Suggestion Modal -->
+				<div class="modal fade" id="suggestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="exampleModalLabel">建議我們</h4>
+				      </div>
+				      <form action="/suggest" method="post" id="sugggestForm">
+					      <div class="modal-body">
+					        <form>
+					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">你的姓名</label>
+					            <input type="text" class="form-control" id="name" name="name">
+					          </div>
+					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">學號</label>
+					            <input type="text" class="form-control" id="stdent_id" name="student_id">
+					          </div>
+					          <div class="form-group">
+					            <label for="message-text" class="control-label">建議內容</label>
+					            <textarea class="form-control" id="comment" name="comment"></textarea>
+					          </div>
+					        </form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+					        <button type="submit" class="btn btn-primary" data-dismiss="modal" value="送出" id="suggestSubmit"></button>
+					      </div>
+				      </form>
+				    </div>
+				  </div>
+				</div>
+				<script>
+				$('#suggestionModal').on('show.bs.modal', function (event) {
+				  var button = $(event.relatedTarget) // Button that triggered the modal
+				  var recipient = button.data('whatever') // Extract info from data-* attributes
+				  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+				  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+				  var modal = $(this)
+				  modal.find('.modal-title').text('New message to ' + recipient)
+				  modal.find('.modal-body input').val(recipient)
+				})
+				$('#suggestSubmit').click(function(){
+					$('#sugggestForm').submit()
+					$('#sugggestForm').on('shown.bs.modal', function () {
+					    $('#sugggestForm').focus()
+					  })
+					$('suggestionModal').modal('hide')
+				})
+				</script>
+				<!-- Suggestion form -->
+
 
 				<div class="ui grid">
 					<div class="five wide column" style="padding-top:0px;margin-left:30px;margin-right:0">
@@ -218,39 +265,34 @@
 						<!-- 團拍填表訊息 -->
 						<% if(groupShotBuy === '應選購') { %>
 							<div class="ui negative message">
-								<i class="close icon"></i>
 							  <div class="header">
-							    您必須選購「照片」或「照片＆團拍夾」
+								<i class='icon warning sign'></i>尚未填表
+							    
 							  </div>
-							  <a href="#form1"><button class="ui button" id="form1btn">請點我填表</button></a>
-							  <button class="ui red button" id="form1btnclose">關掉表單</button>
-							</div>			
+							  <div class="description">
+							  	您必須選購「照片」或「照片＆團拍夾」!
+							  </div>
+							  <a href="#form1"><button class="ui button small" id="form1btn" data-target="#form1" data-toggle="collapse">請點我填表</button></a>
+							</div>		
 							<script>
-								$('#form1btn').click(function(){
-									$('#form1').removeClass('hidden')
-								})
-								$('#form1btnclose').click(function(){
-									$('#form1').addClass('hidden')
-								})
-							</script>
+								$('#form1back').click(function(){
+								    $('#form1').collapse('toggle')
+								});
+							</script>	
 						<% } else if (groupShotEPhoto === '否' && groupShotAdd === 0) { %>
 							<div class="ui message">
-								<i class="close icon"></i>
 							  <div class="header">
 							    您要加洗或購買電子檔嗎？
 							  </div>
-							  <a href="#form2"><button class="ui button" id="form2btn" >請點我填表</button></a>
-							  <button class="ui red button" id="form2btnclose">關掉表單</button>
+							  <a href="#form2"><button type="button" class="ui button" id="form2btn" data-target="#form2" data-toggle="collapse" aria-controls="form2" aria-expand="false" href="form2">請點我填表</button></a>
 							</div>			
 							<script>
 								$('#form2btn').click(function(){
-									$('#form2').removeClass('hidden');
-								})
-								$('#form2btnclose').click(function(){
-									$('#form2').addClass('hidden')
-								})
+								    $('#form2').collapse('toggle')
+								});
 							</script>
 						<% } %>
+						
 						<!-- 團拍填表訊息 -->
 						
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -263,9 +305,8 @@
 							<% if( (groupShotAdd != '' || groupShotEPhoto != '') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
 							<!-- 填表＆未繳費 & 加洗or電子未繳費 -->
 								<div class="ui message">
-									<i class="close icon"></i>
 								  <div class="header">
-								    您還有 <%=groupShotTotal%> + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
+								    您還有 $ <%=groupShotTotal%> + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
 
 								  </div>
 								  <div class="content">
@@ -282,7 +323,6 @@
 							<% if( (groupShotAdd != 0 || groupShotEPhoto != '否') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
 								<!-- 填表＆已繳費 & 加洗or電子未繳費 -->
 									<div class="ui message">
-										<i class="close icon"></i>
 									  <div class="header">
 									    您還有 $ 0 + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
 
@@ -296,19 +336,18 @@
 									  	<a href="http://www.facebook.com/lulala123"><i class="ui facebook icon"></i>Lulalachen</a>
 									  </div>
 									</div>			
+							<% } else { %>
+								<div class="ui message">
+									<div class="header">
+									    <i class="child icon"></i>繳費完成
+								    </div>
+								      <div class="description">感謝您的配合！</div>
+								</div>
 							<% } %>
-
 						<% } %>
 						<!-- 團拍繳費訊息 -->
 
 						<script>
-							$('.close.icon').click(function(){
-									alert('想逃啊！快交錢！！！！')
-								})
-							$('.message .close').on('click', function() {
-							  $(this).closest('.message').fadeOut();
-							});						
-
 							$('#groupPhoto').click(function(){
 								$('#form').removeClass('hidden')
 							})
@@ -401,7 +440,6 @@
 						<!-- 畢冊未繳費-->
 						<% if(gradBookPay === 'x' ) { %>
 							<div class="ui message">
-								<i class="close icon"></i>
 							  <div class="header">
 							    您還有 <%=gradBookTotal%> 未繳納
 							  </div>
@@ -469,49 +507,102 @@
 							    </tr>
 						  	</tbody>
 						</table>	
-						<div class="ui message">
-							<i class="close icon"></i>
-						  <div class="header">
-						   上傳步驟說明
-						  </div>
-						  <div class="content" style="font-size:0.7;">
-						  	<ol>
-						  		<li>請先下載整個「目錄資料夾」：<a href="http://ppt.cc/Vz9L">http://ppt.cc/Vz9L</a></li>
-						  		<li>解壓縮「目錄資料夾」，然後依目錄放置照片</li>
-						  		<li>將「目錄資料夾」改為以學號命名</li>
-						  		<li>壓縮成「bxxxxxxxx.rar(zip)」上傳</li>
-						  	</ol>
-						  	<ul>
-						  		<li>時間：12 / 30～01 / 31</li>
-						  		<li><a href="http://www.dropitto.me/b00303a">http://www.dropitto.me/b00303a</a></li>
-						  		<li class="ui red">password：iloveecon</li>
-						  		<li>每次檔案必須小於75mb</li>
-						  	</ul>
-
-						  </div>
+						<div class="ui tablet stackable steps">
+								  <div class="step">
+								    <i class="download icon"></i>
+								    <div class="content">
+								      <div class="title">下載資料夾</div>
+								      <div class="description">先下載整個「目錄資料夾」</div>
+								    </div>
+								  </div>
+								  <div class=" step">
+								    <i class="archive icon"></i>
+								    <div class="content">
+								      <div class="title">解壓縮</div>
+								      <div class="description">解壓縮「目錄資料夾」</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="folder open icon"></i>
+								    <div class="content">
+								      <div class="title">放入照片</div>
+								      <div class="description">依照目錄放置照片</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="write icon"></i>
+								    <div class="content">
+								      <div class="title">重新命名</div>
+								      <div class="description">將資料夾以「學號」命名</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="cube icon"></i>
+								    <div class="content">
+								      <div class="title">壓縮</div>
+								      <div class="description">壓縮成 bxxxxxxx.rar(zip)</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="cloud upload icon"></i>
+								    <div class="content">
+								      <div class="title">上傳</div>
+								      <div class="description">上傳到雲端空間</div>
+								      <a href="http://dropitto.me/b00303a"><div class="description">連結點我!!</div></a>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="info circle red icon"></i>
+								    <div class="content">
+								      <div class="title">上傳備註</div>
+								      <div class="description">password：iloveecon</div>
+								      <div class="description">截止日：2015/01/31</div>
+								      <div class="description">每次檔案必須小於75mb</div>
+								    </div>
+								  </div>
+								</div>
+								<script>
+									$('.step').hover(function(){
+										$(this).addClass('active')
+									},function(){
+										$(this).removeClass('active')
+									})
+								</script>
 						</div>		
 					</div>
-
-					<script>
-						$('#dropbox').click(function(){
-							client.authenticate();
-						})
-					</script>
 				</div>
 
+				<div class="collapse" id="form1">
+					<div class="row">
+						<div class='.col-xs-12 .col-md-8'>
+							<iframe src="https://docs.google.com/forms/d/1_T_aG8UEJiRKGoniVyTchOM8Dp6oDFq_n4MHKFxnreM/viewform?c=0&w=1" frameborder="0" width="770px" height="620px" border="solid black"></iframe>
+					   </div>
+					   <div class='.col-xs-6 .col-md-4'>
+					   		<a href="#top"><button class="btn btn-primary" id="form1back">返回</button></a>
+						   	<script>
+								$('#form1back').click(function(){
+								    $('#form1').collapse('toggle')
+								});
+							</script>
+					   </div>
+				   </div>
+			   </div>
 
-
-
-				<div class="ui grid hidden" id="form1">
-					<div class="eight wide column">
-						<iframe src="https://docs.google.com/forms/d/1_T_aG8UEJiRKGoniVyTchOM8Dp6oDFq_n4MHKFxnreM/viewform?c=0&w=1" frameborder="0" width="770px" height="720px"></iframe>
-					</div>
-				</div>
-				<div class="ui grid hidden" id="form2">
-					<div class="eight wide column">
-						<iframe src="https://docs.google.com/forms/d/1D7skTSEK5Oz9tmEkwsQgH1jCQhncfeKMlpXxFE7wzgQ/viewform?usp=send_form" frameborder="0" width="770px" height="720px"></iframe>
-					</div>
-				</div>
+				<div class="collapse" id="form2">
+					<div class="row">
+						<div class='.col-xs-12 .col-md-8'>
+							<iframe src="https://docs.google.com/forms/d/1D7skTSEK5Oz9tmEkwsQgH1jCQhncfeKMlpXxFE7wzgQ/viewform?usp=send_form" frameborder="0" width="770px" height="620px" border="solid black"></iframe>
+					   </div>
+					   <div class='.col-xs-6 .col-md-4'>
+					   		<a href="#top"><button class="btn btn-primary" id="form2back">返回</button></a>
+						   	<script>
+								$('#form2back').click(function(){
+								    $('#form2').collapse('toggle')
+								});
+							</script>
+					   </div>
+				   </div>
+			   </div>
 
 
 
