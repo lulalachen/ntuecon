@@ -25,7 +25,7 @@
 
 		<div class="ui grid center aligned" style="padding-top:20px">
 			<div class="ui centered aligned">
-				<h1 class="ui header center aligned"><i class="ui icon student"></i> &nbsp;NTU Economics</h1>
+				<h1 class="ui header center aligned"><i class="ui icon student"></i> &nbsp;NTU Economics B00</h1>
 				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
 			</div>
 		</div>
@@ -40,8 +40,10 @@
 				    	<i class="home icon"></i> 首頁
 				  	</a>
 				  	<a class=" item" data-toggle="modal" data-target="#suggestionModal">
-				  		<input type="hidden" value="<%=name%>" name="name">
-				    	<i class="people icon"></i> 建議我們
+				    	<i class="send outline icon"></i> 建議我們
+				  	</a>
+				  	<a class=" item" data-toggle="modal" data-target="#">
+				    	<i class="treatment icon"></i> Q&A
 				  	</a>
 				  	<div class="right menu">
 				    	<div class="item">
@@ -91,6 +93,10 @@
 					            <input type="text" class="form-control" id="stdent_id" name="student_id">
 					          </div>
 					          <div class="form-group">
+					            <label for="recipient-name" class="control-label">主題</label>
+					            <input type="text" class="form-control" id="title" name="title">
+					          </div>
+					          <div class="form-group">
 					            <label for="message-text" class="control-label">建議內容</label>
 					            <textarea class="form-control" id="comment" name="comment"></textarea>
 					          </div>
@@ -98,7 +104,7 @@
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
-					        <button type="submit" class="btn btn-primary" data-dismiss="modal" value="送出" id="suggestSubmit"></button>
+					        <button type="submit" class="btn btn-primary" data-dismiss="modal" value="送出" id="suggestSubmit">送出</button>
 					      </div>
 				      </form>
 				    </div>
@@ -271,24 +277,30 @@
 							  </div>
 							  <div class="description">
 							  	您必須選購「照片」或「照片＆團拍夾」!
+							  <a href="#form1"><button class="ui button mini primary" id="form1btn" data-target="#form1" data-toggle="collapse">請點我填表</button></a>
 							  </div>
-							  <a href="#form1"><button class="ui button small" id="form1btn" data-target="#form1" data-toggle="collapse">請點我填表</button></a>
 							</div>		
 							<script>
-								$('#form1back').click(function(){
+								$('#form1btn').click(function(){
 								    $('#form1').collapse('toggle')
 								});
+								
+
 							</script>	
 						<% } else if (groupShotEPhoto === '否' && groupShotAdd === 0) { %>
 							<div class="ui message">
 							  <div class="header">
 							    您要加洗或購買電子檔嗎？
 							  </div>
-							  <a href="#form2"><button type="button" class="ui button" id="form2btn" data-target="#form2" data-toggle="collapse" aria-controls="form2" aria-expand="false" href="form2">請點我填表</button></a>
+							  <a href="#form2"><button type="button" class="ui left attached button mini basic" id="form2btn" data-target="#form2" data-toggle="collapse" aria-controls="form2" aria-expand="false" href="form2">請點我填表</button></a>
+							  <a href="#form2-1"><button class="ui right attached button mini basic" id="form2-1btn" data-target="#form2-1" data-toggle="collapse">更多資訊</button></a>
 							</div>			
 							<script>
 								$('#form2btn').click(function(){
 								    $('#form2').collapse('toggle')
+								});
+								$('#form2-1btn').click(function(){
+								    $('#form2-1').collapse('toggle')
 								});
 							</script>
 						<% } %>
@@ -514,7 +526,7 @@
 								    <i class="download icon"></i>
 								    <div class="content">
 								      <a href="http://ppt.cc/Vz9L"><div class="title">下載資料夾</div></a>
-								      <div class="description">先下載整個「目錄資料夾」</div>
+								      <div class="description">下載整個「目錄資料夾」</div>
 								    </div>
 								  </div>
 								  <div class=" step">
@@ -605,6 +617,22 @@
 				   </div>
 			   </div>
 
+			   <div class="collapse" id="form2-1">
+					<div class="row">
+						<div class='.col-xs-12 .col-md-8' style="width:770px, height:620px">
+							yuguyg
+					   </div>
+					   <div class='.col-xs-6 .col-md-4'>
+					   		<a href="#top"><button class="btn btn-primary" id="form2-1back">返回</button></a>
+						   	<script>
+								$('#form2-1back').click(function(){
+								    $('#form2-1').collapse('toggle')
+								});
+							</script>
+					   </div>
+				   </div>
+			   </div>
+
 
 
 
@@ -660,7 +688,7 @@
 		
 		<div class="ui grid centered aligned">
 			<div class="sixteen wide column centered center aligned " style="padding-top:150px">
-					<p>- Econ Graduates 2015 -</p>
+					<p>- Econ Graduates 2015 -</p> <i class="flag tw"></i>
 			</div>
 		</div>
 	</div>
