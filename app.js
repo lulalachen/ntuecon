@@ -46,12 +46,49 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.listen(process.env.PORT || 5000,function(){
+app.listen(process.env.PORT || 3000,function(err){
+    if(err) throw err
     console.log("Server start")
 })
 
+var http = require('http'),
+    httpProxy = require('http-proxy');
 
-/// error handlers
+//
+// Create a proxy server with custom application logic
+//
+
+//var proxy = httpProxy.createProxyServer({});
+httpProxy.createServer(  
+  require('proxy-by-url')({
+  '/github': { port: 80, host: 'github.com' },
+  '/nodejitsu': { port: 80, host: 'nodejitsu.com' },
+  '/localstuff': { port: 80, host: 'localhost' } 
+  })
+).listen(8000);
+//
+// Create your custom server and just call `proxy.web()` to proxy
+// a web request to the target passed in the options
+// also you can use `proxy.ws()` to proxy a websockets request
+//
+
+
+/*
+/// Reverse Proxy///
+var node_reverse_proxy = require('node-reverse-proxy');
+
+var ip = '54.65.240.93';
+var reverse_proxy = new node_reverse_proxy({
+    //'184.168.221.56' : ip + ':3000'
+    //'my.second_host.com' : ip + ':8081',
+    //'my.second_host.com/page/' : ip + ':8080',
+    //'' : ip + ':3000' // catch all other routes
+    ip : ip + ':3000'
+});
+
+reverse_proxy.start(80);
+*/
+//error handlers
 var myErrorHandler = function(err, req, res, next){
     console.log('j')
     if(err){
