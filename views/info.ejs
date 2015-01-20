@@ -319,7 +319,7 @@
 								  </div>
 								</div>			
 							<% } %>
-						<% } else  { %>
+						<% } else if (groupShotAdd != 0 || groupShotEPhoto != '否') { %>
 							<% if( (groupShotAdd != 0 || groupShotEPhoto != '否') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
 								<!-- 填表＆已繳費 & 加洗or電子未繳費 -->
 									<div class="ui message">
@@ -337,12 +337,12 @@
 									  </div>
 									</div>			
 							<% } else { %>
-								<div class="ui message">
+							<div class="ui message">
 									<div class="header">
 									    <i class="child icon"></i>繳費完成
 								    </div>
 								      <div class="description">感謝您的配合！</div>
-								</div>
+							</div>
 							<% } %>
 						<% } %>
 						<!-- 團拍繳費訊息 -->
@@ -450,12 +450,14 @@
 								<p>中國信託銀行公館分行</p>
 							  </div>
 							</div>								
+						<% }else if (gradBookPay === 'o') { %>
+							<div class="ui message">
+								<div class="header">
+								    <i class="child icon"></i>繳費完成
+							    </div>
+		 				        <div class="description">感謝您的配合！</div>
+							</div>
 						<% } %>
-						<script>
-							$('.message .close').on('click', function() {
-								$(this).closest('.message').fadeOut();
-							});			
-						</script>
 						<!-- 畢冊未繳費-->
 
 					</div>
@@ -511,7 +513,7 @@
 								  <div class="step">
 								    <i class="download icon"></i>
 								    <div class="content">
-								      <div class="title">下載資料夾</div>
+								      <a href="http://ppt.cc/Vz9L"><div class="title">下載資料夾</div></a>
 								      <div class="description">先下載整個「目錄資料夾」</div>
 								    </div>
 								  </div>
@@ -546,9 +548,8 @@
 								  <div class="step">
 								    <i class="cloud upload icon"></i>
 								    <div class="content">
-								      <div class="title">上傳</div>
-								      <div class="description">上傳到雲端空間</div>
-								      <a href="http://dropitto.me/b00303a"><div class="description">連結點我!!</div></a>
+								      <a href="http://dropitto.me/b00303a"><div class="title">上傳</div></a>
+								      <div class="description">把資料夾上傳到雲端空間</div>
 								    </div>
 								  </div>
 								  <div class="step">
