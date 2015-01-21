@@ -50,12 +50,12 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-/*
+
 app.listen(process.env.PORT || 5000,function(){
     console.log("Server start")
 })
-*/
-app.listen(3000)
+
+//app.listen(3000)
 
 /// error handlers
 var myErrorHandler = function(err, req, res, next){
