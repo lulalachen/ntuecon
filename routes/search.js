@@ -134,6 +134,7 @@ exports.readPost = function(req,res,next){
 			console.log(post+'toggled')
 			res.redirect('/admin')
 		})
+		res.redirect('/')
 	})
 }
 
@@ -145,9 +146,6 @@ exports.qa = function(req,res){
 		name : req.body.name
 	})
 }
-
-
-
 
 
 

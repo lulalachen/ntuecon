@@ -38,7 +38,6 @@
 				<form action="/qa" method="post" id='keepName'>
 					<input type="hidden" name="name" value="<%= name %>" id="keep">
 				</form>
-
 			</div>
 		</div>
 		
@@ -146,7 +145,6 @@
 					            <label for="message-text" class="control-label">建議內容</label>
 					            <textarea class="form-control" id="comment" name="comment" required></textarea>
 					          </div>
-
 					        </form>
 					      </div>
 					      <div class="modal-footer">
@@ -164,7 +162,6 @@
 				  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 				  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 				  var modal = $(this)
-				  modal.find('.modal-title').text('您好！很感謝您寶貴的意見！')
 				  modal.find('.modal-body input').val(recipient)
 				})
 				$('#suggestSubmit').click(function(){
@@ -566,7 +563,7 @@
 							    </tr>
 							    <tr>
 							      <td class="">班冊個人照片</td>
-							      <td class="center aligned">
+							      <td class="center aligned"> 
 							      	<% if (classBookPhoto === '合格'){%>
 							      		<i class="large green checkmark icon"></i>
 							      	<% } else {%>
@@ -790,9 +787,6 @@
 						
 					</script>
 				</div>
-
-
-
 
 
 				<div class="ui grid centered">

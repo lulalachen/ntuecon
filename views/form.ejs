@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+	<title>Information</title>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<script src="/javascripts/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css">
+	<link rel="text/javascript" href="/javascripts/semantic.js">
+	<link rel="stylesheet" href="/stylesheets/semantic.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="t6dab94nlinm1c2"></script>
+    <script src="/js/info.js"></script>
+    <script src="/javascripts/countdown.js"></script>
+	<script src="/js/dropbox.js"></script>
+	<style>
+		
+	</style>
+</head>
+<body ng-app="infoApp" ng-controller="ArithCtrl">
+
+<div class="pusher">
+
+	<div class="ui grid centered" style="padding-top:30px">
+
+		<div class="ui grid center aligned" style="padding-top:20px">
+			<div class="ui centered aligned">
+				<h1 class="ui header center aligned"><i class="ui icon anchor"></i> &nbsp;NTU Economics</h1>
+				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
+			</div>
+		</div>
+		<script>
+			$("#click").click(function(){
+				console.log('click')
+				$('.test.modal').modal('show');				
+				console.log('click2')
+			})
+		</script>
+		
+		<!-- LOCAL INFORMATION -->
+		<div class="ui grid centered" style="padding-top:10px">
+
+<%=name%>
+			<div class="ten wide column">
+				<div class="ui secondary pointing menu">
+				  	<a class=" item" href="/">
+				    	<i class="home icon"></i> Home
+				  	</a>
+				  	<div class="right menu">
+				    	<div class="item">
+				    		<div class="ui icon input">
+						        <input type="text" placeholder="請輸入學號或姓名" id="input">
+						        <i class="search link icon" id="submit"></i>
+						    </div>
+				    		<form action="/search" method="post" id="getId" hidden=1>
+				    			<div class="ui search">
+								  	<div class="ui icon input thin">
+								    	<input class="prompt" type="text" placeholder="Common passwords..." name="input" id="sync">
+								    	<i class="search icon"></i>
+								  	</div>
+								  	<div class="results"></div>
+								</div>
+					      		<script>
+					      		$("#submit").click(function(){
+					      			console.log($("#input").val())
+					      			var input = $("#input").val()
+					      			$("#sync").val(input);
+					      			console.log($("sync").val())
+									$("#getId").submit();
+								});
+					      		</script>
+				      		</form>
+				    	</div>
+					</div>
+				</div>
+				<div class="ui grid" style="padding-top:30px">
+					<div class="ui centered eight wide column">
+
+						<form action="/suggest" method="post" class="ui form">
+							<h1 class="ui dividing header">問題</h1>
+						        <div class="field">
+								   <label>姓名</label>
+						          <input type="text" name="name" placeholder="名字">
+						        </div>
+						        <div class="field">
+								   <label>學號</label>
+						          <input type="text" name="student_id" placeholder="學號">
+						        </div>
+						        <div class="inline fields">
+								    <label for="subject">問題分類</label>
+								    <div class="field">
+								      <div class="ui radio checkbox">
+								        <input type="radio" name="subject" >
+								        <label>畢冊相關</label>
+								      </div>
+								    </div>
+								    <div class="field">
+								      <div class="ui radio checkbox">
+								        <input type="radio" name="subject" > 
+								        <label>團拍相關</label>
+								      </div>
+								    </div>
+								    <div class="field">
+								      <div class="ui radio checkbox">
+								        <input type="radio" name="subject" >
+								        <label>繳交資料</label>
+								      </div>
+								    </div>
+								    <div class="field">
+								      <div class="ui radio checkbox">
+								        <input type="radio" name="subject" checked="">
+								        <label>其他</label>
+								      </div>
+								    </div>
+							    </div>
+						    	<div class="field">
+								    <label>你的建議</label>
+								    <input type="text" name="comment" name="comment"></input>
+							  	</div>
+							  	<input type="submit" class="ui button" value="送出">
+							  	<a href="/search"><button class="ui button red">Back</button></a>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>	
+</div>
+
