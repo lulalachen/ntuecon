@@ -2,6 +2,7 @@ var Spreadsheet = require('edit-google-spreadsheet');
 var mongoose = require('mongoose');
 var Suggestion = mongoose.model('Suggestion');
 var session = require('express-session')
+var QA = mongoose.model('QA')
 
 exports.search = function(req,res){
 	if (req.body.input === 'admin'){
@@ -93,7 +94,6 @@ exports.search = function(req,res){
 }
 
 
-var Suggestion =  mongoose.model("Suggestion");
 
 exports.suggestPost = function(req,res,next){
 	console.log('suggest Post')
@@ -108,7 +108,7 @@ exports.suggestPost = function(req,res,next){
 
 		console.log(suggest.name + "'s suggestion : " + suggest.commment + " Saved!")
 		//next()
-		res.redirect('/search',{
+		res.redirect('/',{
 			name : req.body.name
 		})
 	})
@@ -134,18 +134,41 @@ exports.readPost = function(req,res,next){
 			console.log(post+'toggled')
 			res.redirect('/admin')
 		})
-		res.redirect('/')
 	})
 }
 
 
 exports.qa = function(req,res){
 	console.log('Q&A'+ req.body.name)
+	QA.find(function(err,qa){	
+			res.render('qa',{
+				qa : qa,
+				name : req.body.name
+		})
+	})
 
-	res.render('qa',{
-		name : req.body.name
+}
+
+exports.createQA = function(req,res){
+	new QA ({
+		question : req.body.question,
+		answer : req.body.amswer,
+		que : req.body.que
+	}).save(function(err,qa){
+		res.redirect('/admin')
 	})
 }
 
+exports.editQA = function(req,res){
+	QA.findById(req.params.id,function(err,qa){
+		qa.question = req.body.question
+	})
+
+}
+
+exports.delete = function(req,res){
+
+
+}
 
 

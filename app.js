@@ -51,11 +51,10 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.listen(process.env.PORT || 5000,function(){
+//app.listen(process.env.PORT || 5000,function(){
+app.listen(process.env.PORT || 3000,function(){
     console.log("Server start")
 })
-
-//app.listen(3000)
 
 /// error handlers
 var myErrorHandler = function(err, req, res, next){
