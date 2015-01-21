@@ -5,10 +5,11 @@ var Schema = mongoose.Schema;
 var Suggestion =new Schema({
 	name : String,
 	student_id : String,
-	title : String,
-	subject : Array,
+	subject : String,
+	contact : String,
 	comment : String,
-	Date : {type:Date,default:Date.now()}
+	Date : {type:Date,default:Date.now()},
+	read : {type:Boolean,default:false}
 })
 
 

@@ -1,6 +1,7 @@
 var Spreadsheet = require('edit-google-spreadsheet');
 var mongoose = require('mongoose');
 var Suggestion = mongoose.model('Suggestion');
+var session = require('express-session')
 
 exports.search = function(req,res){
 	if (req.body.input === 'admin'){
@@ -44,7 +45,7 @@ exports.search = function(req,res){
 						if( rows[i][1] === input || rows[i][2] === input ){
 							// Search for specific person
 							console.log('Hello ' + rows[i][2])
-							console.log(rows)
+							//console.log(rows)
 							res.render('info',{
 								student_id 			: rows[i][1],
 								name 				: rows[i][2],
@@ -100,20 +101,51 @@ exports.suggestPost = function(req,res,next){
 		name : req.body.name,
 		student_id : req.body.student_id,
 		subject : req.body.subject,
-		title : req.body.title,
+		contact : req.body.contact,
 		comment : req.body.comment
 	}).save(function(err,suggest,count){
 		if(err) return next(err)
 
 		console.log(suggest.name + "'s suggestion : " + suggest.commment + " Saved!")
 		//next()
+		res.redirect('/search',{
+			name : req.body.name
+		})
+	})
+}
+
+exports.admin = function(req,res){
+	Suggestion.find(function(err,suggestion){
+		res.render('admin',{
+			suggestion : suggestion
+		})
+	})
+}
+exports.readPost = function(req,res,next){
+	Suggestion.findById(req.params.id,function(err,post){
+		if(err) next(err)
+		if (post.read === false) {
+			post.read = true; 
+		}else{
+			post.read = false;
+		}
+		console.log(post)
+		post.save(function(err,post,count){
+			console.log(post+'toggled')
+			res.redirect('/admin')
+		})
 		res.redirect('/')
 	})
 }
 
 
+exports.qa = function(req,res){
+	console.log('Q&A'+ req.body.name)
 
-
+	res.render('qa',{
+		name : req.body.name
+	})
+}
 
 
 

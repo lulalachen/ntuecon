@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session')
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -24,7 +25,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')))
 
+
+//require('./routes/search')(app)
 app.get('/', routes.index);
+app.get('/admin',search.admin)
+app.post('/qa',search.qa)
+app.post('/back',search.search)
 app.get('/search', routes.reload);
 app.post('/search',search.search);
 app.get('/comment',routes.comment);
@@ -36,7 +42,7 @@ app.post('/comment/posts/:id/comments/', routes.postComments);
 app.put('/comment/posts/:id/comment/:id/upvotes', routes.putCommentsUpvotes);
 
 app.post('/suggest',search.suggestPost);
-
+app.get('/read/:id',search.readPost);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,8 +56,6 @@ app.listen(process.env.PORT || 80,function(err){
     console.log("Server start")
 })
 
-var http = require('http'),
-    httpProxy = require('http-proxy');
 
 //httpProxy.createServer(3000,'localhost').listen(80,'54.65.240.93');
 
