@@ -1,0 +1,939 @@
+<!doctype html>
+<html>
+<head>
+	<title>Information</title>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<script src="/javascripts/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css">
+	<link rel="text/javascript" href="/javascripts/semantic.js">
+	<link rel="stylesheet" href="/stylesheets/semantic.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="t6dab94nlinm1c2"></script>
+    <script src="/js/info.js"></script>
+    <script src="/javascripts/countdown.js"></script>
+	<script src="/js/dropbox.js"></script>
+	<style>
+		button {
+			stroke:0.5px;
+		}
+		
+		textarea {
+		  border: 1px solid #999;
+		  padding: 5px;
+		  width: 100%;
+		}
+	</style>
+</head>
+<body ng-app="infoApp" ng-controller="ArithCtrl">
+
+<div class="pusher" id="top">
+
+	<div class="ui grid centered" style="padding-top:30px">
+
+		<div class="ui grid center aligned" style="padding-top:20px">
+			<div class="ui centered aligned">
+				<h1 class="ui header center aligned"><i class="ui icon student"></i> &nbsp;NTU Economics B00</h1>
+				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;嗨！ <%= name %>&nbsp; 你今天好嗎？</h4>
+				<form action="/qa" method="post" id='keepName'>
+					<input type="hidden" name="name" value="<%= name %>" id="keep">
+				</form>
+
+			</div>
+		</div>
+		
+		<!-- LOCAL INFORMATION -->
+		<div class="ui grid centered" style="padding-top:10px">
+
+
+			<div class="ten wide column">
+				<div class="ui secondary pointing menu">
+				  	<a class=" item" href="/">
+				    	<i class="home icon"></i> 首頁
+				  	</a>
+				  	<a class=" item" data-toggle="modal" data-target="#suggestionModal">
+				    	<i class="send outline icon"></i> 建議我們
+				  	</a>
+				  	<a class="item" id="keepNamebtn">
+				    	<i class="treatment icon"></i> Q&A
+				  	</a>
+				  	<div class="right menu">
+				    	<div class="item">
+				    		<div class="ui icon input">
+						        <input type="text" placeholder="請輸入學號或姓名" id="input">
+						        <i class="search link icon" id="submit"></i>
+						    </div>
+				    		<form action="/search" method="post" id="getId" hidden=1>
+				    			<div class="ui search">
+								  	<div class="ui icon input thin">
+								    	<input class="prompt" type="text" placeholder="Common passwords..." name="input" id="sync">
+								    	<i class="search icon"></i>
+								  	</div>
+								  	<div class="results"></div>
+								</div>
+					      		<script>
+					      		$("#submit").click(function(){
+					      			console.log($("#input").val())
+					      			var input = $("#input").val()
+					      			$("#sync").val(input);
+					      			console.log($("sync").val())
+									$("#getId").submit();
+								});
+
+								<!-- move to QA page and remember user -->
+								$('#keepNamebtn').click(function(){
+									console.log('click')
+									$('#keepName').submit()
+								})					
+								<!-- move to QA page and remember user -->
+					      		</script>
+				      		</form>
+				    	</div>
+					</div>
+				</div>
+
+				<!-- Suggestion Modal -->
+				<div class="modal fade" id="suggestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="exampleModalLabel">建議我們</h4>
+				      </div>
+				      <form action="/suggest" method="post" id="sugggestForm">
+					      <div class="modal-body">
+					        <form>
+					          <div class="form-group required">
+					            <label for="recipient-name" class="control-label">你的姓名</label>
+					            <input type="text" class="form-control" id="name" name="name" placeholder="你的姓名是？" required>
+					          </div>
+					          <div class="form-group required">
+					            <label for="recipient-name" class="control-label">學號</label>
+					            <input type="text" class="form-control" id="stdent_id" name="student_id" placeholder="你的學號是？" required>
+					          </div>
+					          <div class="form-group required">
+					            <label for="recipient-name" class="control-label">聯絡方式</label>
+					            <input type="email" class="form-control" id="contact" name="contact" placeholder="我們該如何回覆你呢？" required>
+					          </div>
+					          <label for="title">
+					          	問題分類
+					          </label>
+					          	<div class="radio">
+								  <label>
+								    <input type="radio" name="title" id="title" value="option1" checked>
+								    團拍相關
+								  </label>
+								</div>
+								<div class="radio">
+								  <label>
+								    <input type="radio" name="title" id="title" value="option2">
+								    畢冊相關
+								  </label>
+								</div>
+								<div class="radio">
+								  <label>
+								    <input type="radio" name="title" id="title" value="option3">
+								    上傳資料相關
+								  </label>
+								</div>			
+								<div class="radio">
+								  <label>
+								    <input type="radio" name="title" id="title" value="option3">
+								    其他
+								  </label>
+								</div>	
+					          <div class="form-group required">
+					            <label for="message-text" class="control-label">建議內容</label>
+					            <textarea class="form-control" id="comment" name="comment" required></textarea>
+					          </div>
+
+					        </form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+					        <button type="submit" class="btn btn-primary" data-dismiss="modal" value="送出" id="suggestSubmit">送出</button>
+					      </div>
+				      </form>
+				    </div>
+				  </div>
+				</div>
+				<script>
+				$('#suggestionModal').on('show.bs.modal', function (event) {
+				  var button = $(event.relatedTarget) // Button that triggered the modal
+				  var recipient = button.data('whatever') // Extract info from data-* attributes
+				  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+				  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+				  var modal = $(this)
+				  modal.find('.modal-title').text('您好！很感謝您寶貴的意見！')
+				  modal.find('.modal-body input').val(recipient)
+				})
+				$('#suggestSubmit').click(function(){
+					$('#sugggestForm').submit()
+					$('#sugggestForm').on('shown.bs.modal', function () {
+					    $('#sugggestForm').focus()
+					  })
+					$('suggestionModal').modal('hide')
+				})
+				</script>
+				<!-- Suggestion form -->
+
+
+				<div class="ui grid">
+					<div class="five wide column" style="padding-top:0px;margin-left:30px;margin-right:0">
+						<h3>
+							<i class="ui icon photo"></i>&nbsp;&nbsp;團拍相關
+						</h3>
+						<table class="ui blue table " >
+							<thead>
+							    <tr>
+									<th class="six wide center aligned">項目</th>
+									<!-- <th>Tags</th> -->
+									<th class="five wide center aligned">數量</th>
+									<th class="five wide center aligned">費用</th>
+							    </tr>
+						  	</thead>
+						  	<tbody>
+							    <tr>
+							      <td class="">團拍費用</td>
+							      <td class="center aligned">
+							      	<% if(groupShot ==='有參與'){%>
+							      		1
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShot ==='有參與'){%>
+							      		$ 50
+							      	<% }else{ %>
+							      		$ 0
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">照片費用</td>
+							      <td class="center aligned">
+							      	<% if(groupShotBuy ==='照片＆團拍夾' || groupShotBuy === '照片'){%>
+							      		1
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotBuy ==='照片＆團拍夾' || groupShotBuy === '照片'){%>
+							      		$ 210
+							      	<% }else{ %>
+							      		$ 0
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">團拍夾</td>
+							      <td class="center aligned">
+							      	<% if(groupShotBuy ==='照片＆團拍夾' || groupShotBuy === '團拍夾'){%>
+							      		1
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotBuy ==='照片＆團拍夾' || groupShotBuy === '團拍夾'){%>
+							      		$ 135
+							      	<% }else{ %>
+							      		$ 0
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">加洗照片</td>
+							      <td class="center aligned">
+							      	<% if (groupShotAdd != '') { %>
+							      		<%= groupShotAdd %>
+							      	<% } else { %>
+										0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotAdd != '' ){%>
+							      		$ <%= groupShotTotal %>
+							      	<% }else{ %>
+							      		$ 0
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">加洗優惠</td>
+							      <td class="center aligned">
+							      	<% if(groupShotAdd != '') { %>
+							      		<%= groupShotAdd %>
+							      	<% } else { %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotAdd != ''){%>
+							      		<%= groupShotTotal %>
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">購買電子檔</td>
+							      <td class="center aligned">
+							      	<% if(groupShotEPhoto != ''){%>
+							      		<%= groupShotEPhoto %>
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotEPhoto != ''){%>
+							      		<%= groupShotEPhotoTotal %>
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">合成費用</td>
+							      <td class="center aligned">
+							      	<% if(groupShotPS != ''){%>
+							      		<%= groupShotPS %>
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(groupShotPS != ''){%>
+							      		<%= groupShotPS %>
+							      	<% }else{ %>
+							      		0
+							      	<% } %>
+							      </td>
+							    </tr>
+						  	</tbody>
+						</table>
+						
+						<!-- 團拍填表訊息 -->
+						<% if(groupShotBuy === '應選購') { %>
+							<div class="ui negative message">
+							  <div class="header">
+								<i class='icon warning sign'></i>尚未填表
+							    
+							  </div>
+							  <div class="description">
+							  	您必須選購「照片」或「照片＆團拍夾」!
+							  <a href="#form1"><button class="ui button mini primary" id="form1btn" data-target="#form1" data-toggle="collapse">請點我填表</button></a>
+							  </div>
+							</div>		
+							<script>
+								$('#form1btn').click(function(){
+								    $('#form1').collapse('toggle')
+								});
+								
+
+							</script>	
+						<% } else if (groupShotEPhoto === '否' && groupShotAdd === 0) { %>
+							<div class="ui message">
+								<div class="header">
+								    <i class="child icon"></i>繳費完成
+							    </div>
+							      <div class="description">提醒您，您還可以加洗或購買電子檔<i class="icon info"></i>	</div>
+							      <script>
+
+							      </script>
+							</div>
+							<div class="ui message">
+							  <div class="header">
+							    您要加洗或購買電子檔嗎？
+							  </div>
+							  <a href="#form2"><button type="button" class="ui left attached button mini basic" id="form2btn" data-target="#form2" data-toggle="collapse" aria-controls="form2" aria-expand="false" href="form2">請點我填表</button></a>
+							  <a href="#form2-1"><button class="ui right attached button mini basic" id="form2-1btn" data-target="#form2-1" data-toggle="collapse">更多資訊</button></a>
+							</div>			
+							<script>
+								$('#form2btn').click(function(){
+								    $('#form2').collapse('toggle')
+								});
+								$('#form2-1btn').click(function(){
+								    $('#form2-1').collapse('toggle')
+								});
+							</script>
+						<% } %>
+						
+						<!-- 團拍填表訊息 -->
+						
+					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+						<!-- 團拍繳費訊息 -->
+
+						<% if( (groupShotBuy === '照片＆團拍夾' || groupShotBuy === '照片') && groupShotPay != 'o') { %>
+							<!-- 填表＆未繳費 -->
+
+							<% if( (groupShotAdd != '' || groupShotEPhoto != '') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
+							<!-- 填表＆未繳費 & 加洗or電子未繳費 -->
+								<div class="ui message">
+								  <div class="header">
+								    您還有 $ <%=groupShotTotal%> + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
+
+								  </div>
+								  <div class="content">
+								  	<h4>《匯款資訊》</h4>
+								  	<p>帳號：154200399235 </p>
+									<p>戶名：陳泰宇</p>
+									<p>華南銀行台大分行</p>
+									<h4>《面交》</h4>
+								  	<a href="http://www.facebook.com/lulala123" class="newWindow"><i class="ui facebook icon"></i>Lulalachen</a>
+								  </div>
+								</div>			
+							<% } %>
+						<% } else if (groupShotAdd != 0 || groupShotEPhoto != '否') { %>
+							<% if( (groupShotAdd != 0 || groupShotEPhoto != '否') && (groupShotAddPay != 'o' || groupShotEPhotoPay != 'o') ) { %>
+								<!-- 填表＆已繳費 & 加洗or電子未繳費 -->
+									<div class="ui message">
+									  <div class="header">
+									    您還有 $ 0 + <%=groupShotAddTotal%> + <%=groupShotEPhotoTotal%>  未繳納
+
+									  </div>
+									  <div class="content">
+									  	<h4>《匯款資訊》</h4>
+									  	<p>帳號：154200399235 </p>
+										<p>戶名：陳泰宇</p>
+										<p>華南銀行台大分行</p>
+										<h4>《面交》</h4>
+									  	<a href="http://www.facebook.com/lulala123" class="newWindow"><i class="ui facebook icon"></i>Lulalachen</a>
+									  </div>
+									</div>			
+							<% } else { %>
+							<div class="ui message">
+									<div class="header">
+									    <i class="child icon"></i>繳費完成
+								    </div>
+								      <div class="description">感謝您的配合！</div>
+							</div>
+							<% } %>
+						<% } %>
+						<!-- 團拍繳費訊息 -->
+
+						<script>
+							$('#groupPhoto').click(function(){
+								$('#form').removeClass('hidden')
+							})
+						</script>
+					</div>
+					<div class="five wide column" style="padding-top:0px">
+						<h3>
+							<i class="ui icon book"></i>&nbsp;&nbsp;畢冊相關
+						</h3>
+							
+						<table class="ui blue table " >
+							<thead>
+							    <tr>
+									<th class="six wide center aligned">項目</th>
+									<!-- <th>Tags</th> -->
+									<th class="five wide center aligned">數量</th>
+									<th class="five wide center aligned">費用</th>
+							    </tr>
+						  	</thead>
+						  	<tbody>
+							    <tr>
+							      <td class="">校冊</td>
+							      <td class="center aligned">
+							      	<% if(gradBook === '套組＆預購禮' || gradBook === '校冊' || gradBook === '套組') { %>
+							      		<%= gradBookQuantity %>
+							      	<% } else { %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組' || gradBook === '校冊') { %>
+							      		$ 750
+							      	<% } else { %>
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">班冊</td>
+							      <td class="center aligned">
+							      	<% if(gradBook === '套組＆預購禮' || gradBook === '班冊' || gradBook === '套組') { %>
+							      		<%= gradBookQuantity %>
+							      	<% } else { %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組' || gradBook ==='班冊') { %>
+							      		$ 750
+							      	<% } else { %>
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">合購優惠<i class="icon info small very" id="discount1"></i></td>
+							      <td class="center aligned">
+							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組') { %>
+							      		<%= gradBookQuantity %>
+							      	<% } else { %>
+							      	<% } %>
+							      </td>
+							      <td class="center aligned">
+							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組') { %>
+							      		($ 400)</p>
+							      	<% } else { %>
+							      		( $ 0 )</p>
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">預購禮</td>
+							      <td class="center aligned">
+							      	<% if(gradBook === '套組＆預購禮') { %>
+							      		<%= gradBookQuantity %>
+							      	<% } else { %>
+							      		0
+							      	<% } %>
+							      </td>
+							      <td>
+							      	<% if(gradBook === '套組＆預購禮') { %>
+							      		
+							      	<% } else { %>
+							      		
+							      	<% } %>
+							      </td>
+							    </tr>
+						  	</tbody>
+						</table>	
+
+
+						<!-- 畢冊未繳費-->
+						<% if(gradBookPay === 'x' ) { %>
+							<div class="ui message">
+							  <div class="header">
+							    您還有 <%=gradBookTotal%> 未繳納
+							  </div>
+							  <div class="content">
+							  	<h4>《匯款資訊》</h4>
+							  	<p>帳號：347540290460 </p>
+								<p>銀行代號：822</p>
+								<p>中國信託銀行公館分行</p>
+							  </div>
+							</div>								
+						<% }else if (gradBookPay === 'o') { %>
+							<div class="ui message">
+								<div class="header">
+								    <i class="child icon"></i>繳費完成
+							    </div>
+		 				        <div class="description">感謝您的配合！</div>
+							</div>
+						<% } %>
+						<!-- 畢冊未繳費-->
+
+						<!-- 未購買者 -->
+						<% if (gradBook === '未購買'){ %>
+							<div class="ui message">
+								<div class="header">
+								    <i class="alarm outline icon"></i>此階段預購結束
+							    </div>
+							      <div class="description">請靜候第二階段加購消息</div>
+							</div>
+						<% } %>
+
+					</div>
+					
+					<div class="five wide column" style="padding-top:0px">
+						<h3>
+							<i class="ui icon inbox"></i>&nbsp;&nbsp;繳交資料
+						</h3>
+							
+						<table class="ui blue table  center aligned" >
+							<thead>
+							    <tr>
+									<th class="six wide">項目</th>
+									<!-- <th>Tags</th> -->
+									<th class="five wide center aligned">是否完成</th>
+							    </tr>
+						  	</thead>
+						  	<tbody>
+							    <tr>
+							      <td class="">校冊個人照片</td>
+							      <td class="center aligned">
+							      	<% if (yearBookPhoto === '合格'){%>
+							      		<i class="large green checkmark icon"></i>
+							      	<% } else {%>
+							      		<i class="large red close icon"></i>
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">班冊個人照片</td>
+							      <td class="center aligned">
+							      	<% if (classBookPhoto === '合格'){%>
+							      		<i class="large green checkmark icon"></i>
+							      	<% } else {%>
+							      		<i class="large red close icon"></i>
+							      	<% } %>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td class="">團體照片<i class="icon info small very" id="info"></i></td>
+							      <td class="center aligned">
+							      	<% if (classBookGroupPhoto === '已上傳') {%>
+							      	<i class="large green checkmark icon"></i>
+							      	<% }else{%>
+							      		<i class="large red close icon"></i>
+							      	<% } %>
+							      </td>
+							   
+							    </tr>
+						  	</tbody>
+						</table>	
+						<div class="ui tablet stackable steps">
+								  <div class="step">
+								    <i class="download icon"></i>
+								    <div class="content">
+								      <a href="http://ppt.cc/Vz9L" class="newWindow"><div class="title">下載資料夾</div></a>
+								      <div class="description">下載整個「目錄資料夾」</div>
+								    </div>
+								  </div>
+								  <div class=" step">
+								    <i class="archive icon"></i>
+								    <div class="content">
+								      <div class="title">解壓縮</div>
+								      <div class="description">解壓縮「目錄資料夾」</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="folder open icon"></i>
+								    <div class="content">
+								      <div class="title">放入照片</div>
+								      <div class="description">依照目錄放置照片</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="write icon"></i>
+								    <div class="content">
+								      <div class="title">重新命名</div>
+								      <div class="description">將資料夾以「學號」命名</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="cube icon"></i>
+								    <div class="content">
+								      <div class="title">壓縮</div>
+								      <div class="description">壓縮成 bxxxxxxx.rar(zip)</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="cloud upload icon"></i>
+								    <div class="content">
+								      <a href="http://dropitto.me/b00303a" class="newWindow"><div class="title">上傳</div></a>
+								      <div class="description">把資料夾上傳到雲端空間</div>
+								    </div>
+								  </div>
+								  <div class="step">
+								    <i class="info circle red icon"></i>
+								    <div class="content">
+								      <div class="title">上傳備註</div>
+								      <div class="description">password：iloveecon</div>
+								      <div class="description">截止日：2015/01/31</div>
+								      <div class="description">每次檔案必須小於75mb</div>
+								    </div>
+								  </div>
+								</div>
+								<script>
+									$('.step').hover(function(){
+										$(this).addClass('active')
+									},function(){
+										$(this).removeClass('active')
+									})
+								</script>
+						</div>		
+					</div>
+				</div>
+
+				<div class="collapse" id="form1">
+					<div class="row">
+						<div class='.col-xs-12 .col-md-8'>
+							<iframe src="https://docs.google.com/forms/d/1_T_aG8UEJiRKGoniVyTchOM8Dp6oDFq_n4MHKFxnreM/viewform?c=0&w=1" frameborder="0" width="770px" height="620px" border="solid black"></iframe>
+					   </div>
+					   <div class='.col-xs-6 .col-md-4'>
+					   		<a href="#top"><button class="btn btn-primary" id="form1back">返回</button></a>
+						   	<script>
+								$('#form1back').click(function(){
+								    $('#form1').collapse('toggle')
+								});
+							</script>
+					   </div>
+				   </div>
+			   </div>
+
+				<div class="collapse" id="form2">
+					<div class="row">
+						<div class='.col-xs-12 .col-md-8'>
+							<iframe src="https://docs.google.com/forms/d/1D7skTSEK5Oz9tmEkwsQgH1jCQhncfeKMlpXxFE7wzgQ/viewform?usp=send_form" frameborder="0" width="770px" height="620px" border="solid black"></iframe>
+					   </div>
+					   <div class='.col-xs-6 .col-md-4'>
+					   		<a href="#top"><button class="btn btn-primary" id="form2back">返回</button></a>
+						   	<script>
+								$('#form2back').click(function(){
+								    $('#form2').collapse('toggle')
+								});
+							</script>
+					   </div>
+				   </div>
+			   </div>
+				<div class="collapse" id="form2-1">	
+					<div id="carousel" class="carousel slide relative" data-ride="carousel" style="max-width:70%;max-height:20%">
+					  <!-- Indicators -->
+					  <ol class="carousel-indicators" style="size:150%">
+					    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+					    <li data-target="#carousel" data-slide-to="1"></li>
+					    <li data-target="#carousel" data-slide-to="2"></li>
+					    <li data-target="#carousel" data-slide-to="3"></li>
+					    <li data-target="#carousel" data-slide-to="4"></li>
+					    <li data-target="#carousel" data-slide-to="5"></li>
+					    <li data-target="#carousel" data-slide-to="6"></li>
+					    <li data-target="#carousel" data-slide-to="7"></li>
+					    <li data-target="#carousel" data-slide-to="8"></li>
+					    <li data-target="#carousel" data-slide-to="9"></li>
+					    <li data-target="#carousel" data-slide-to="10"></li>
+					    <li data-target="#carousel" data-slide-to="11"></li>
+					    <li data-target="#carousel" data-slide-to="12"></li>
+					    <li data-target="#carousel" data-slide-to="13"></li>
+					    <li data-target="#carousel" data-slide-to="14"></li>
+					  </ol>
+
+					  <!-- Wrapper for slides -->
+					  <div class="carousel-inner" role="listbox">
+					    <div class="item fit center active">
+					      <img src="/images/group1.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group2.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group3.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group4.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group5.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group5.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group6.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group7.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group8.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group9.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group10.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group11.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group12.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group13.jpg" alt="">
+					    </div>
+					    <div class="item fit center">
+					      <img src="/images/group14.jpg" alt="">
+					    </div>
+					  </div>
+					
+
+				  <!-- Controls -->
+					  <a class="left carousel-control" role="button" data-slide="prev" data-target="#carousel">
+					    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					    <span class="sr-only">Previous</span>
+					  </a>
+					  <a class="right carousel-control" role="button" data-slide="next" data-target="#carousel">
+					    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					    <span class="sr-only">Next</span>
+					  </a>
+					</div>
+					<a href="#form2"><button type="button" class="btn btn-primary" id="form2-1linkbtn" data-target="#form2" data-toggle="collapse" aria-controls="form2" aria-expand="false">請點我填表</button></a>
+					<a href="#top"><button class="btn btn-default" id="form2-1back">返回</button></a>
+					<style>
+						.relative {
+						  position: relative;
+						  left: 200px;
+						  right:100px;
+						 
+						}
+						img{
+							width:1080px;
+							height:720px;
+						}
+					</style>
+					<script>
+						<!-- Go back to TOP -->
+						$('#form2-1back').click(function(){
+						    $('#form2-1').collapse('toggle')
+						});
+						<!-- Go fill the form -->
+						$('#form2-1linkbtn').click(function(){
+						    $('#form2').collapse('toggle')
+						    $('#form2-1').collapse('toggle')
+						});
+						
+					</script>
+				</div>
+
+
+
+
+
+				<div class="ui grid centered">
+					<div class="eight wide column">
+
+						  <div class="content">
+						    <h1 class="header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;距離&nbsp;2015&nbsp;/&nbsp;06&nbsp;/&nbsp;13&nbsp;畢業典禮</h1>
+						   		<div class="ui statistics">
+								  <div class="purple statistic">
+								    <div class="value" id="day">
+								      
+								    </div>
+								    <div class="label">
+								      Days
+								    </div>
+								  </div>
+								  <div class="blue statistic">
+								    <div class="value" id="hour">
+								      
+								    </div>
+								    <div class="label">
+								      Hours
+								    </div>
+								  </div>
+								  <div class="teal statistic">
+								    <div class="value" id="minute">
+								      
+								    </div>
+								    <div class="label">
+								      Minutes
+								    </div>
+								  </div>
+								  <div class="red statistic">
+								    <div class="value" id="second">
+								      
+								    </div>
+								    <div class="label">
+								      Second
+								    </div>
+								  </div>
+
+								</div>
+						  	</div>
+						  </div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		<div class="ui grid centered aligned">
+			<div class="sixteen wide column centered center aligned " style="padding-top:150px">
+					<p>- Econ Graduates 2015 -</p> <i class="flag tw"></i>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+(function() {
+    var lastTime = 0;
+    var vendors = ['ms', 'moz', 'webkit', 'o'];
+    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
+                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
+    }
+ 
+    if (!window.requestAnimationFrame)
+        window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() { callback(currTime + timeToCall); }, 
+              timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+        };
+ 
+    if (!window.cancelAnimationFrame)
+        window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+        };
+}());
+(function() {
+	function byId(id) {
+		return document.getElementById(id);
+	}
+	function update() {
+
+		var start = new Date(2015, 6, 13, 9,0);
+
+		var month = byId('month'),
+			day = byId('day'),
+			hour = byId('hour'),
+			minute = byId('minute'),
+			second = byId('second');
+		
+		//month.innerHTML = countdown(start,null).months;
+		day.innerHTML = countdown(start,null,countdown.DAYS).days;
+		hour.innerHTML = countdown(start,null).hours;
+		minute.innerHTML = countdown(start,null).minutes;
+		second.innerHTML = countdown(start,null).seconds;
+
+		requestAnimationFrame(update);
+	}
+	update();
+})();
+
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+
+
+$('.newWindow').click(function (event){
+ 
+    var url = $(this).attr("href");
+    var windowName = "popUp";//$(this).attr("name");
+    //var windowSize = windowSizeArray[$(this).attr("rel")];
+
+    window.open(url, windowName);
+
+    event.preventDefault();
+
+});
+
+</script>
+
+</body>
+
+
+</html>

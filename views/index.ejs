@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<title>台大經濟畢業生資訊平台</title>
+    	<link rel='stylesheet' href='/stylesheets/semantic.css' />
+    	<link rel='stylesheet' href='/stylesheets/skel.css' />
+		<!-- Latest compiled and minified CSS -->
+		
+    	<script src="/javascripts/jquery.js"></script> 
+    	<script src="/javascripts/jquery.min.js"></script> 
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    	<script src="/javascripts/semantic.js"></script>
+	    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+	    <script src="./js/index.js"></script>
+		<style>
+			.roll {
+				-webkit-animation: bg 60s linear infinite ;
+			}
+			.back {
+				z-index: 1;
+			}
+			i
+			#content {
+ 			    height: 100%;
+			    left: 0;
+			    opacity: 1;
+			    position: fixed;
+			    top: -200px;
+			    width: 100%;
+				border-color: transparent;
+				z-index: 2;
+				float: right;
+			}
+	
+			.over{
+				background-color: white;
+				opacity: 0.1;
+				border-color: transparent;
+			}
+
+		</style>
+  	</head>
+  	
+  	<body>
+		
+		<div class="wrapper">
+			<i class="sidebar circular content very large icon" id="content"></i>
+			<div id="bg" class='back'></div>
+			<div id="overlay" class='back'></div>
+			<div id="main" class='back'>
+				
+				<!-- Header -->
+					<header id="header">
+						
+						<h1>台大經濟系畢業生資訊平台</h1>
+						<p>團拍資訊 &nbsp;&cross;&nbsp; 畢冊資訊 &nbsp;&cross;&nbsp;畢聯會訊息</p>
+						<nav>
+
+
+							<form action="/search" method="post" id='getId'>
+								<div class="ui icon input">
+									<input type="text" placeholder="請輸入學號或姓名" name='input'>
+									<i class="circular search icon" id='submit'></i>
+
+								</div>
+								<script>
+									$("#submit").click(function(){
+										$("#getId").submit();
+										$("h1").transition('horizontal flip')
+										$("p").transition('horizontal flip')
+										$(".icon.input").addClass('loading')
+									});
+									$("#content").hover(function(){
+										$(this).addClass('over')
+									},function(){
+										$(this).removeClass('over')
+									})
+									<% if(message.length > 0) { %>
+										$('input')
+										  .transition('shake')
+										;	
+										$('input').setAttribute('placeholder',message)									
+									<% } %>
+
+								</script>
+							</form>
+						</nav>
+					</header>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+
+						<a href="https://www.facebook.com/ntuECONb00" class="newWindow"><i class="circular icon inverted facebook"></i></a>
+						<a href="mailto:b00303a@gmail.com" class="newWindow"><i class="circular icon inverted mail" ></i></a>
+					</footer>
+				
+			</div>
+		</div>
+		<script>
+			$('i').hover(function(){
+				$(this).removeClass('inverted');
+			},function(){
+				$(this).addClass('inverted');
+			})
+
+			$('.sidebar').first()
+			  .sidebar('attach events', '.sidebar.icon')
+			;
+
+			$('.sidebar.icon')
+			  .removeClass('disabled')
+			;
+			$('.newWindow').click(function (event){
+ 
+                var url = $(this).attr("href");
+                var windowName = "popUp";//$(this).attr("name");
+               // var windowSize = windowSizeArray[$(this).attr("rel")];
+
+                window.open(url, windowName);
+
+                event.preventDefault();
+
+            });
+		</script>
+  </body>
+</html>
