@@ -45,7 +45,7 @@
 				  	<a class=" item" href="/">
 				    	<i class="home icon"></i> 首頁
 				  	</a>
-				  	<a class=" item" href="#">
+				  	<a class=" item" data-toggle="modal" data-target="#" href="/qa">
 				    	<i class="treatment icon"></i> Q&A
 				  	</a>
 				  	<div class="right menu">
@@ -120,10 +120,22 @@
 		            <tbody>
 	                	<% qa.forEach( function (qa){ %>
 		                <tr>
-		                    <td> <%=qa.question%></td>
-		                    <td> <%=qa.answer%> </td>
-		                    <td>  <%=qa.que%> </td>
-		                    <td> <a href="/editQA/<%=qa._id%>" id="edit">Edit</a></td>
+
+						      <% if( qa._id == current ){ %>
+						      <form action="/updateQA/<%= qa._id %>" method="post" class="ui form">
+						        <td> <input type="text" value="<%=qa.question%>" style="width:200px; height:100px;" name="question"></td>
+			                    <td> <input type="text" value="<%=qa.answer%>" style="width:350px; height:100px;"  name="answer"></td>
+			                    <td> <input type="text" value="<%=qa.que%>" name="que"></td>
+			                    <td> <input class="ui button mini" type="submit" id="edit" value="Edit"></a></td>
+						      </form>
+						      <% }else{ %>
+						        <td> <%=qa.question%></td>
+			                    <td> <%=qa.answer%> </td>
+			                    <td>  <%=qa.que%> </td>
+			                    <td> <a href="/edit/<%=qa._id%>" id="edit">Edit</a></td>
+
+						      <% } %>
+		                    
 		                    <td> <a href="/deleteQA/<%=qa._id%>">Delete</a> </td>
 			            </tr>
 		                <% }); %>
@@ -136,6 +148,12 @@
 				            </tr>
 		                </form>
 		            </tbody>
+
+		            <script>
+		            	$('#edit').click(function(){
+
+		            	})
+		            </script>
 	            </table>    
 			</div>
 		</div>

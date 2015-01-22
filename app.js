@@ -44,6 +44,10 @@ app.put('/comment/posts/:id/comment/:id/upvotes', routes.putCommentsUpvotes);
 app.post('/suggest',search.suggestPost);
 app.get('/read/:id',search.readPost);
 
+app.post('/createQA',search.createQA)
+app.get('/editQA/:id',search.editQA)
+app.get('/deleteQA/:id',search.deleteQA)
+app.post('/updateQA/:id',search.updateQA)
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
