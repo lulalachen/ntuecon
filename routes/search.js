@@ -7,7 +7,12 @@ var QA = mongoose.model('QA')
 exports.search = function(req,res){
 	if (req.body.input === 'admin'){
 		Suggestion.find(function(err, suggestion){
-			res.render('admin',{suggestion : suggestion})
+			QA.find(function(err, qa){
+			res.render('admin',{
+				suggestion : suggestion,
+				qa : qa
+			})
+			})
 		})
 	}else{
 
