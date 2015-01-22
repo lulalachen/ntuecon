@@ -4,10 +4,24 @@ var Suggestion = mongoose.model('Suggestion');
 var session = require('express-session')
 var QA = mongoose.model('QA')
 
+
+
 exports.search = function(req,res){
 	if (req.body.input === 'admin'){
 		Suggestion.find(function(err, suggestion){
-			res.render('admin',{suggestion : suggestion})
+			QA.find(function(err,qa){
+				var temp = 0;
+				suggestion.forEach(function(sug){
+				console.log(sug.read+"**");
+					if(!sug.read)
+						temp++;
+				})
+				res.render('admin',{
+					suggestion : suggestion,
+					qa : qa,
+					count : temp
+				})
+			})
 		})
 	}else{
 
@@ -120,9 +134,16 @@ exports.admin = function(req,res){
 		find().
 		sort('que').
 		exec(function(err,qa){
+			var temp = 0;
+			suggestion.forEach(function(sug){
+			console.log(sug.read+"**");
+				if(!sug.read)
+					temp++;
+			})
 			res.render('admin',{
 				suggestion : suggestion,
-				qa : qa
+				qa : qa,
+				count : temp
 			})
 		})
 	})

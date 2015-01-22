@@ -466,7 +466,19 @@
 							      </td>
 							    </tr>
 							    <tr>
-							      <td class="">合購優惠<i class="icon info small very" id="discount1"></i></td>
+							      <td class="">
+									<i class="circular inline heart icon link" data-content="Hello. This is a small popup" data-variation="small"></i>
+							      	合購優惠<i class="icon info small very" id="discount1"></i>
+							      </td>
+							      <script>
+
+							    	$('.inline.icon')
+									  .popup({
+									    inline: true
+									  })
+									;
+							    </script>
+							    
 							      <td class="center aligned">
 							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組') { %>
 							      		<%= gradBookQuantity %>
