@@ -63,7 +63,7 @@ app.listen(process.env.PORT || 80,function(err){
 // Create a proxy server with custom application logic
 //
 
-var proxy = httpProxy.createProxyServer({});
+//var proxy = httpProxy.createProxyServer({});
 /*
 httpProxy.createServer(  
   require('proxy-by-url')({
