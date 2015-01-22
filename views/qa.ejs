@@ -10,6 +10,13 @@
 	<link rel="stylesheet" href="/stylesheets/semantic.css">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="t6dab94nlinm1c2"></script>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script>
+	  $(function() {
+	    $( "#accordion" ).accordion();
+	  });
+	</script>
 </head>
 <body ng-app="infoApp" ng-controller="ArithCtrl">
 
@@ -165,7 +172,22 @@
 				</script>
 				<!-- Suggestion form -->
 
+
+					<div class="ui styled fluid accordion" id="accordion">
+						<% qa.forEach(function(qa){ %>
+						  <div class="active title" style="background-color:#D8D8D8">
+						   <p style=""> <i class="dropdown icon"></i>
+						    	<%= qa.question %></p>
+						  </div>
+						  <div class="active content">
+						    	<p style=""><%= qa.answer %></p>
+						  </div>
+					  	<% }) %>
+					</div>
+
+
 			</div>
+
 		</div>
 
 		<!-- Content Start Here -->

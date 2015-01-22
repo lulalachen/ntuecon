@@ -12,6 +12,14 @@ var Suggestion =new Schema({
 	read : {type:Boolean,default:false}
 })
 
+var QA = new Schema({
+	question : String,
+	answer : String,
+	que : Number,
+	Date : {type:Date,default:Date.now()}
+})
+
+
 
 var Post = new Schema({
 	title : String,
@@ -32,6 +40,7 @@ var Comment = new Schema({
 })
 
 var Suggestion = mongoose.model('Suggestion',Suggestion);
+var QA = mongoose.model('QA',QA);
 var Post = mongoose.model('Post',Post);
 var Comment = mongoose.model('Comment',Comment);
 /*

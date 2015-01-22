@@ -2,6 +2,7 @@ var Spreadsheet = require('edit-google-spreadsheet');
 var mongoose = require('mongoose');
 var Suggestion = mongoose.model('Suggestion');
 var session = require('express-session')
+var QA = mongoose.model('QA')
 
 exports.search = function(req,res){
 	if (req.body.input === 'admin'){
@@ -93,7 +94,6 @@ exports.search = function(req,res){
 }
 
 
-var Suggestion =  mongoose.model("Suggestion");
 
 exports.suggestPost = function(req,res,next){
 	console.log('suggest Post')
@@ -108,7 +108,7 @@ exports.suggestPost = function(req,res,next){
 
 		console.log(suggest.name + "'s suggestion : " + suggest.commment + " Saved!")
 		//next()
-		res.redirect('/search',{
+		res.redirect('/',{
 			name : req.body.name
 		})
 	})
@@ -116,8 +116,14 @@ exports.suggestPost = function(req,res,next){
 
 exports.admin = function(req,res){
 	Suggestion.find(function(err,suggestion){
-		res.render('admin',{
-			suggestion : suggestion
+		QA.
+		find().
+		sort('que').
+		exec(function(err,qa){
+			res.render('admin',{
+				suggestion : suggestion,
+				qa : qa
+			})
 		})
 	})
 }
@@ -134,18 +140,68 @@ exports.readPost = function(req,res,next){
 			console.log(post+'toggled')
 			res.redirect('/admin')
 		})
-		res.redirect('/')
 	})
 }
 
 
 exports.qa = function(req,res){
 	console.log('Q&A'+ req.body.name)
-
-	res.render('qa',{
-		name : req.body.name
+	QA.
+	find().
+	sort( 'que' ).
+	exec(function(err,qa){	
+		res.render('qa',{
+			qa : qa,
+			name : req.body.name
+		})
 	})
 }
 
+exports.createQA = function(req,res){
+	new QA ({
+		question : req.body.question,
+		answer : req.body.answer,
+		que : req.body.que
+	}).save(function(err,qa){
+		res.redirect('/admin')
+	})
+}
+
+exports.editQA = function(req,res){
+	QA.find(function(err, qa){
+		Suggestion.find(function(err,suggestion){
+			console.log(req.params.id + " " + qa)
+			res.render('editQA',{
+				qa : qa,
+				suggestion : suggestion,
+				current : req.params.id
+			})
+		})
+	})
+}
+
+exports.updateQA = function(req,res){
+	QA.findById(req.params.id,function(err,qa){
+		qa.question = req.body.question
+		qa.answer = req.body.answer
+		qa.que = req.body.que
+
+		qa.save(function(err,qa){
+			res.redirect('/admin')
+		})
+	})
+
+}
+
+exports.deleteQA = function(req,res){
+	QA.findById(req.params.id,function(err,qa){
+		console.log(req.params.id)
+		console.log(qa)
+		qa.remove(function(err,qa){
+			res.redirect('/admin')
+		})
+	})
+
+}
 
 
