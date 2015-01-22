@@ -62,6 +62,7 @@ exports.search = function(req,res){
 							console.log('Hello ' + rows[i][2])
 							//console.log(rows)
 							res.render('info',{
+								updateTime			: rows[3][4],
 								student_id 			: rows[i][1],
 								name 				: rows[i][2],
 								cell 				: rows[i][3],
