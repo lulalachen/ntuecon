@@ -112,33 +112,10 @@
 					            <label for="recipient-name" class="control-label">聯絡方式</label>
 					            <input type="email" class="form-control" id="contact" name="contact" placeholder="我們該如何回覆你呢？" >
 					          </div>
-					          <label for="subject">
-					          	問題分類
-					          </label>
-					          	<div class="radio">
-								  <label>
-								    <input type="radio" name="subject" id="subject" value="option1" checked>
-								    團拍相關
-								  </label>
-								</div>
-								<div class="radio">
-								  <label>
-								    <input type="radio" name="subject" id="subject" value="option2">
-								    畢冊相關
-								  </label>
-								</div>
-								<div class="radio">
-								  <label>
-								    <input type="radio" name="subject" id="subject" value="option3">
-								    上傳資料相關
-								  </label>
-								</div>			
-								<div class="radio">
-								  <label>
-								    <input type="radio" name="subject" id="subject" value="option3">
-								    其他
-								  </label>
-								</div>	
+					          <div class="form-group required">
+						        <label for="recipient-name" class="control-label">問題分類</label>
+						        <input type="text" class="form-control" id="subject" name="subject" placeholder="（畢冊相關／團拍相關／繳費相關／資料上傳）" required>
+					          </div>
 					          <div class="form-group">
 					            <label for="message-text" class="control-label">建議內容</label>
 					            <textarea class="form-control" id="comment" name="comment"></textarea>
@@ -218,6 +195,21 @@
 			  		<% }) %>
 					</div>
 				</div>
+				<div class="ui bottom attached segment hidden" id="其他">
+					<div class="ui styled fluid accordion">
+					<% qa.forEach(function(qa){ %>
+						<% if (qa.category === '其他')  { %>
+							<div class="active title" style="background-color:#D8D8D8">
+								<p style=""> <i class="dropdown icon"></i>
+								<%= qa.question %></p>
+							</div>
+							<div class="active content">
+								<p style=""><%= qa.answer %></p>
+							</div>
+						<% } %>
+			  		<% }) %>
+					</div>
+				</div>
 				<div class="ui bottom attached segment hidden" id="繳費">
 					<div class="ui styled fluid accordion" >
 					<% qa.forEach(function(qa){ %>
@@ -233,26 +225,16 @@
 			  		<% }) %>
 					</div>
 				</div>
-				<div class="ui bottom attached segment hidden" id="其他">
-					<div class="ui styled fluid accordion" >
-					<% qa.forEach(function(qa){ %>
-						<% if (qa.category === '其他')  { %>
-							<div class="active title" style="background-color:#D8D8D8">
-								<p style=""> <i class="dropdown icon"></i>
-								<%= qa.question %></p>
-							</div>
-							<div class="active content fluid">
-								<p style=""><%= qa.answer %></p>
-							</div>
-						<% } %>
-			  		<% }) %>
-					</div>
-				</div>
+				
 				
 				<script>
 				$('.item').click(function(){
 					$('.active.item').removeClass('active')
 					$(this).addClass('active')
+				})
+				$('#其他標籤').click(function(){
+					$('.ui.segment').not('.hidden').addClass('hidden')
+					$('#其他').removeClass('hidden')
 				})
 				$('#團拍標籤').click(function(){
 					$('.ui.segment').not('.hidden').addClass('hidden')
@@ -260,17 +242,13 @@
 				})
 				$('#畢冊標籤').click(function(){
 					$('.ui.segment').not('.hidden').addClass('hidden')
-					console.log('hi')
 					$('#畢冊').removeClass('hidden')
 				})
 				$('#繳費標籤').click(function(){
 					$('.ui.segment').not('.hidden').addClass('hidden')
 					$('#繳費').removeClass('hidden')
 				})
-				$('#其他標籤').click(function(){
-					$('.ui.segment').not('.hidden').addClass('hidden')
-					$('#其他').removeClass('hidden')
-				})
+				
 				</script>
 
 					  

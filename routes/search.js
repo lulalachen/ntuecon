@@ -123,7 +123,10 @@ exports.suggestPost = function(req,res,next){
 
 		console.log(suggest.name + "'s suggestion : " + suggest.commment + " Saved!")
 		//next()
-		res.redirect('/');
+		//res.end()
+		res.render('index',{
+			message : {}
+		})
 	})
 }
 
