@@ -15,6 +15,7 @@ var Suggestion =new Schema({
 var QA = new Schema({
 	question : String,
 	answer : String,
+	category : String,
 	que : Number,
 	Date : {type:Date,default:Date.now()}
 })

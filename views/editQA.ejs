@@ -97,9 +97,9 @@
 		                    <td>
 			                    <a href="/read/<%=sug._id%>">
 									<% if (sug.read) { %>
-										Read
+										---
 									<% } else { %>
-										Unread
+										Mark as Read
 									<% } %>
 			                	</a>
 		                	</td>
@@ -125,12 +125,14 @@
 						      <form action="/updateQA/<%= qa._id %>" method="post" class="ui form">
 						        <td> <input type="text" value="<%=qa.question%>" style="width:200px; height:100px;" name="question"></td>
 			                    <td> <input type="text" value="<%=qa.answer%>" style="width:350px; height:100px;"  name="answer"></td>
+			                    <td> <input type="text" value="<%=qa.category%>" name="category"></td>	
 			                    <td> <input type="text" value="<%=qa.que%>" name="que"></td>
-			                    <td> <input class="ui button mini" type="submit" id="edit" value="Edit"></a></td>
+			                    <td> <input class="ui button mini" type="submit" id="edit" value="Save Changes"></a></td>
 						      </form>
 						      <% }else{ %>
 						        <td> <%=qa.question%></td>
 			                    <td> <%=qa.answer%> </td>
+			                    <td> <%=qa.category%></td>
 			                    <td>  <%=qa.que%> </td>
 			                    <td> <a href="/edit/<%=qa._id%>" id="edit">Edit</a></td>
 
@@ -149,11 +151,6 @@
 		                </form>
 		            </tbody>
 
-		            <script>
-		            	$('#edit').click(function(){
-
-		            	})
-		            </script>
 	            </table>    
 			</div>
 		</div>

@@ -123,9 +123,7 @@ exports.suggestPost = function(req,res,next){
 
 		console.log(suggest.name + "'s suggestion : " + suggest.commment + " Saved!")
 		//next()
-		res.redirect('/',{
-			name : req.body.name
-		})
+		res.redirect('/');
 	})
 }
 
@@ -133,6 +131,7 @@ exports.admin = function(req,res){
 	Suggestion.find(function(err,suggestion){
 		QA.
 		find().
+		sort('category').
 		sort('que').
 		exec(function(err,qa){
 			var temp = 0;
@@ -183,6 +182,7 @@ exports.createQA = function(req,res){
 	new QA ({
 		question : req.body.question,
 		answer : req.body.answer,
+		category : req.body.category,
 		que : req.body.que
 	}).save(function(err,qa){
 		res.redirect('/admin')
@@ -206,6 +206,7 @@ exports.updateQA = function(req,res){
 	QA.findById(req.params.id,function(err,qa){
 		qa.question = req.body.question
 		qa.answer = req.body.answer
+		qa.category = req.body.category
 		qa.que = req.body.que
 
 		qa.save(function(err,qa){

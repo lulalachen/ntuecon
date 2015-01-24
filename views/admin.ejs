@@ -100,9 +100,9 @@
 		                    <td>
 			                    <a href="/read/<%=sug._id%>">
 									<% if (sug.read) { %>
-										Read
+										---
 									<% } else { %>
-										Unread
+										Mark as Read
 									<% } %>
 			                	</a>
 		                	</td>
@@ -115,6 +115,7 @@
 		            	<tr>
 			                <th>Question</th>
 			                <th>Answer</th>
+			                <th>Category</th>
 			                <th>Que</th>
 			                <th>Edit</th>
 			                <th>Delete</th>
@@ -125,6 +126,7 @@
 		                <tr>
 		                    <td> <%=qa.question%></td>
 		                    <td> <%=qa.answer%> </td>
+		                    <td> <%=qa.category%></td>
 		                    <td>  <%=qa.que%> </td>
 		                    <td> <a href="/editQA/<%=qa._id%>" id="edit">Edit</a></td>
 		                    <td> <a href="/deleteQA/<%=qa._id%>">Delete</a> </td>
@@ -134,6 +136,7 @@
 		                	<tr>
 			                    <td> <input type="text" name="question"> </td> 
 			                    <td> <input type="text" name="answer"> </td>
+			                    <td><input type="text" name="category"></td>
 			                    <td> <input type="text" name="que"> </td>
 			                    <td colspan=2> <button type="submit" class="ui button">Submit</button> </td>
 				            </tr>

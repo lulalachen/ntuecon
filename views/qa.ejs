@@ -14,14 +14,14 @@
 	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script>
 	  $(function() {
-	    $( "#accordion" ).accordion();
+	    $( ".accordion" ).accordion();
 	  });
 	</script>
 </head>
 <body ng-app="infoApp" ng-controller="ArithCtrl">
 
 <div class="pusher">
-
+	
 	<div class="ui grid centered" style="padding-top:30px">
 
 		<div class="ui grid center aligned" style="padding-top:20px">
@@ -171,21 +171,109 @@
 				})
 				</script>
 				<!-- Suggestion form -->
-
-
-					<div class="ui styled fluid accordion" id="accordion">
-						<% qa.forEach(function(qa){ %>
-						  <div class="active title" style="background-color:#D8D8D8">
-						   <p style=""> <i class="dropdown icon"></i>
-						    	<%= qa.question %></p>
-						  </div>
-						  <div class="active content">
-						    	<p style=""><%= qa.answer %></p>
-						  </div>
-					  	<% }) %>
+				
+				  
+				<div class="ui top attached tabular menu">
+				    <a class="active item" id="團拍標籤">
+					    團拍
+					</a>
+					<a class="item" id="畢冊標籤">
+					    畢冊
+					</a>
+					<a class="item" id="繳費標籤">
+					    繳費
+					</a>
+					<a class="item" id="其他標籤"> 
+					    其他
+					</a>
+				</div>
+				
+				<div class="ui bottom attached segment" id="團拍">
+					<div class="ui styled fluid accordion">
+					<% qa.forEach(function(qa){ %>
+						<% if (qa.category === '團拍')  { %>
+							<div class="active title" style="background-color:#D8D8D8">
+								<p style=""> <i class="dropdown icon"></i>
+								<%= qa.question %></p>
+							</div>
+							<div class="active content">
+								<p style=""><%= qa.answer %></p>
+							</div>
+						<% } %>
+			  		<% }) %>
 					</div>
+				</div>
+				<div class="ui bottom attached segment hidden" id="畢冊">
+					<div class="ui styled fluid accordion" >
+					<% qa.forEach(function(qa){ %>
+						<% if (qa.category === '畢冊') { %>
+							<div class="active title" style="background-color:#D8D8D8">
+								<p style=""> <i class="dropdown icon"></i>
+								<%= qa.question %></p>
+							</div>
+							<div class="active content">
+								<p style=""><%= qa.answer %></p>
+							</div>
+						<% } %>
+			  		<% }) %>
+					</div>
+				</div>
+				<div class="ui bottom attached segment hidden" id="繳費">
+					<div class="ui styled fluid accordion" >
+					<% qa.forEach(function(qa){ %>
+						<% if (qa.category === '繳費')  { %>
+							<div class="active title" style="background-color:#D8D8D8">
+								<p style=""> <i class="dropdown icon"></i>
+								<%= qa.question %></p>
+							</div>
+							<div class="active content">
+								<p style=""><%= qa.answer %></p>
+							</div>
+						<% } %>
+			  		<% }) %>
+					</div>
+				</div>
+				<div class="ui bottom attached segment hidden" id="其他">
+					<div class="ui styled fluid accordion" >
+					<% qa.forEach(function(qa){ %>
+						<% if (qa.category === '其他')  { %>
+							<div class="active title" style="background-color:#D8D8D8">
+								<p style=""> <i class="dropdown icon"></i>
+								<%= qa.question %></p>
+							</div>
+							<div class="active content fluid">
+								<p style=""><%= qa.answer %></p>
+							</div>
+						<% } %>
+			  		<% }) %>
+					</div>
+				</div>
+				
+				<script>
+				$('.item').click(function(){
+					$('.active.item').removeClass('active')
+					$(this).addClass('active')
+				})
+				$('#團拍標籤').click(function(){
+					$('.ui.segment').not('.hidden').addClass('hidden')
+					$('#團拍').removeClass('hidden')
+				})
+				$('#畢冊標籤').click(function(){
+					$('.ui.segment').not('.hidden').addClass('hidden')
+					console.log('hi')
+					$('#畢冊').removeClass('hidden')
+				})
+				$('#繳費標籤').click(function(){
+					$('.ui.segment').not('.hidden').addClass('hidden')
+					$('#繳費').removeClass('hidden')
+				})
+				$('#其他標籤').click(function(){
+					$('.ui.segment').not('.hidden').addClass('hidden')
+					$('#其他').removeClass('hidden')
+				})
+				</script>
 
-
+					  
 			</div>
 
 		</div>
