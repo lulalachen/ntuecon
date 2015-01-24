@@ -23,13 +23,50 @@
 		  padding: 5px;
 		  width: 100%;
 		}
+
+		$('.ui.sticky')
+		  .sticky({
+		    context: '#context'
+		  })
+		;
+		$('.description')
+		  .popup({
+		    inline   : true,
+		    hoverable: true,
+		    position : 'bottom left',
+		    delay: {
+		      show: 300,
+		      hide: 800
+		    }
+		  })
+		;
 	</style>
+	<script>
+	$(function() {
+	  $('a[href*=#]:not([href=#])').click(function() {
+	    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	      var target = $(this.hash);
+	      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	      if (target.length) {
+	        $('html,body').animate({
+	          scrollTop: target.offset().top
+	        }, 1000);
+	        return false;
+	      }
+	    }
+	  });
+	});
+	</script>
 </head>
 <body ng-app="infoApp" ng-controller="ArithCtrl">
 
 <div class="pusher" id="top">
-
-	<div class="ui grid centered" style="padding-top:30px">
+	<div class="ui rail">
+		  <div class="ui fixed top sticky">
+		    eohrerhi
+		  </div>
+		</div>
+	<div class="ui grid centered" style="padding-top:30px" id="context">
 
 		<div class="ui grid center aligned" style="padding-top:20px">
 			<div class="ui centered aligned">
@@ -93,7 +130,7 @@
 				    	</div>
 					</div>
 				</div>
-
+				
 				<!-- Suggestion Modal -->
 				<div class="modal fade" id="suggestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
@@ -117,33 +154,10 @@
 					            <label for="recipient-name" class="control-label">聯絡方式</label>
 					            <input type="email" class="form-control" id="contact" name="contact" placeholder="我們該如何回覆你呢？" required>
 					          </div>
-					          <label for="subject">
-					          	問題分類
-					          </label>
-					          	<div class="radio">
-								  <label>
-								    <input type="radio" name="subject" id="subject" value="option1" checked>
-								    團拍相關
-								  </label>
-								</div>
-								<div class="radio">
-								  <label>
-								    <input type="radio" name="subject" id="subject" value="option2">
-								    畢冊相關
-								  </label>
-								</div>
-								<div class="radio">
-								  <label>
-								    <input type="radio" name="subject" id="subject" value="option3">
-								    上傳資料相關
-								  </label>
-								</div>			
-								<div class="radio">
-								  <label>
-								    <input type="radio" name="subject" id="subject" value="option3">
-								    其他
-								  </label>
-								</div>	
+					          <div class="form-group required">
+					            <label for="recipient-name" class="control-label">問題分類</label>
+					            <input type="text" class="form-control" id="subject" name="subject" placeholder="（畢冊相關／團拍相關／繳費相關／資料上傳）" required>
+					          </div>
 					          <div class="form-group required">
 					            <label for="message-text" class="control-label">建議內容</label>
 					            <textarea class="form-control" id="comment" name="comment" required></textarea>
@@ -174,11 +188,13 @@
 					  })
 					$('suggestionModal').modal('hide')
 				})
+
 				</script>
 				<!-- Suggestion form -->
 
-
-				<div class="ui grid">
+				
+				
+				<div class="ui grid" >
 					<div class="five wide column" style="padding-top:0px;margin-left:30px;margin-right:0">
 						<h3>
 							<i class="ui icon photo"></i>&nbsp;&nbsp;團拍相關
@@ -334,16 +350,8 @@
 								
 
 							</script>	
-						<% } else if (groupShotEPhoto === '否' && groupShotAdd === 0) { %>
-							<div class="ui message">
-								<div class="header">
-								    <i class="child icon"></i>繳費完成
-							    </div>
-							      <div class="description">提醒您，您還可以加洗或購買電子檔<i class="icon info"></i>	</div>
-							      <script>
-
-							      </script>
-							</div>
+						<% } %>
+						<% if ((groupShotEPhoto === '否' && groupShotAdd === 0)) { %>
 							<div class="ui message">
 							  <div class="header">
 							    您要加洗或購買電子檔嗎？
@@ -366,7 +374,17 @@
 					<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
 						<!-- 團拍繳費訊息 -->
+						<%  if ( (groupShotPay === 'o' || groupShotPay ===' ') && (groupShotEPhoto === '否' && groupShotAdd === 0)) { %>
+							<div class="ui message">
+								<div class="header">
+								    <i class="child icon"></i>繳費完成
+							    </div>
+							      <div class="description">提醒您，您還可以加洗或購買電子檔<i class="icon info"></i>	</div>
+							      <script>
 
+							      </script>
+							</div>
+						<%  } %>
 						<% if( (groupShotBuy === '照片＆團拍夾' || groupShotBuy === '照片') && groupShotPay != 'o') { %>
 							<!-- 填表＆未繳費 -->
 
@@ -469,18 +487,12 @@
 							      </td>
 							    </tr>
 							    <tr>
-							      <td class="">
-							      	合購優惠<i class="icon info small very" id="discount1"></i>
+							      <td class="description">
+							      	合購優惠<i class="icon info small very" id="description"></i>
+							      	<div class="ui popup">
+							      		hello
+							      	</div>
 							      </td>
-							      <script>
-
-							    	$('.inline.icon')
-									  .popup({
-									    inline: true
-									  })
-									;
-							    </script>
-							    
 							      <td class="center aligned">
 							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組') { %>
 							      		<%= gradBookQuantity %>
@@ -599,13 +611,17 @@
 						  	</tbody>
 						</table>	
 						<div class="ui tablet stackable steps">
+								<a href="http://ppt.cc/Vz9L" class="newWindow">
 								  <div class="step">
+								  	<a href="http://ppt.cc/Vz9L" class="newWindow"><div class="ui top red right corner label"><i class="download icon"></i></div></a>
 								    <i class="download icon"></i>
 								    <div class="content">
 								      <a href="http://ppt.cc/Vz9L" class="newWindow"><div class="title">下載資料夾</div></a>
 								      <div class="description">下載整個「目錄資料夾」</div>
 								    </div>
 								  </div>
+								</a>
+
 								  <div class=" step">
 								    <i class="archive icon"></i>
 								    <div class="content">
@@ -635,6 +651,7 @@
 								    </div>
 								  </div>
 								  <div class="step">
+								  	<a href="http://dropitto.me/b00303a" class="newWindow"><div class="ui top red right corner label"><i class="upload cloud icon"></i></div></a>
 								    <i class="cloud upload icon"></i>
 								    <div class="content">
 								      <a href="http://dropitto.me/b00303a" class="newWindow"><div class="title">上傳</div></a>
@@ -817,69 +834,6 @@
 </div>
 
 <script>
-(function() {
-    var lastTime = 0;
-    var vendors = ['ms', 'moz', 'webkit', 'o'];
-    for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-        window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-        window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
-                                   || window[vendors[x]+'CancelRequestAnimationFrame'];
-    }
- 
-    if (!window.requestAnimationFrame)
-        window.requestAnimationFrame = function(callback, element) {
-            var currTime = new Date().getTime();
-            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function() { callback(currTime + timeToCall); }, 
-              timeToCall);
-            lastTime = currTime + timeToCall;
-            return id;
-        };
- 
-    if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-        };
-}());
-(function() {
-	function byId(id) {
-		return document.getElementById(id);
-	}
-	function update() {
-
-		var start = new Date(2015, 6, 13, 9,0);
-
-		var month = byId('month'),
-			day = byId('day'),
-			hour = byId('hour'),
-			minute = byId('minute'),
-			second = byId('second');
-		
-		//month.innerHTML = countdown(start,null).months;
-		day.innerHTML = countdown(start,null,countdown.DAYS).days;
-		hour.innerHTML = countdown(start,null).hours;
-		minute.innerHTML = countdown(start,null).minutes;
-		second.innerHTML = countdown(start,null).seconds;
-
-		requestAnimationFrame(update);
-	}
-	update();
-})();
-
-$(function() {
-  $('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.offset().top
-        }, 1000);
-        return false;
-      }
-    }
-  });
-});
 
 
 $('.newWindow').click(function (event){
