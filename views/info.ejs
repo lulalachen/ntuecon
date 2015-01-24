@@ -89,7 +89,7 @@
 				    	<i class="home icon"></i> 首頁
 				  	</a>
 				  	<a class=" item" data-toggle="modal" data-target="#suggestionModal">
-				    	<i class="send outline icon"></i> 建議我們
+				    	<i class="send outline icon"></i> 回報問題
 				  	</a>
 				  	<a class="item" id="keepNamebtn">
 				    	<i class="treatment icon"></i> Q&A
@@ -138,7 +138,7 @@
 				    <div class="modal-content">
 				      <div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="exampleModalLabel">建議我們</h4>
+				        <h4 class="modal-title" id="exampleModalLabel">問題內容</h4>
 				      </div>
 				      <form action="/suggest" method="post" id="sugggestForm">
 					      <div class="modal-body">
@@ -160,7 +160,7 @@
 					            <input type="text" class="form-control" id="subject" name="subject" placeholder="（畢冊相關／團拍相關／繳費相關／資料上傳）" required>
 					          </div>
 					          <div class="form-group required">
-					            <label for="message-text" class="control-label">建議內容</label>
+					            <label for="message-text" class="control-label">問題內容</label>
 					            <textarea class="form-control" id="comment" name="comment" required></textarea>
 					          </div>
 					        </form>
@@ -284,14 +284,14 @@
 							      	<% if(groupShotAdd != '') { %>
 							      		<%= groupShotAdd %>
 							      	<% } else { %>
-							      		0
+							      		$ 0
 							      	<% } %>
 							      </td>
 							      <td class="center aligned">
 							      	<% if(groupShotAdd != ''){%>
 							      		<%= groupShotTotal %>
 							      	<% }else{ %>
-							      		0
+							      		$ 0
 							      	<% } %>
 							      </td>
 							    </tr>
@@ -308,7 +308,7 @@
 							      	<% if(groupShotEPhoto != ''){%>
 							      		<%= groupShotEPhotoTotal %>
 							      	<% }else{ %>
-							      		0
+							      		$ 0
 							      	<% } %>
 							      </td>
 							    </tr>
@@ -325,7 +325,7 @@
 							      	<% if(groupShotPS != ''){%>
 							      		<%= groupShotPS %>
 							      	<% }else{ %>
-							      		0
+							      		$ 0
 							      	<% } %>
 							      </td>
 							    </tr>
@@ -466,8 +466,13 @@
 							      </td>
 							      <td class="center aligned">
 							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組' || gradBook === '校冊') { %>
+										<% if( gradBookQuantity === 1) { %>	
 							      		$ 750
+							      		<% } else { %>
+							      		$ 1500
+							      		<% }  %>
 							      	<% } else { %>
+							      		$ 0
 							      	<% } %>
 							      </td>
 							    </tr>
@@ -482,8 +487,13 @@
 							      </td>
 							      <td class="center aligned">
 							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組' || gradBook ==='班冊') { %>
+							      		<% if( gradBookQuantity === 1) { %>	
 							      		$ 750
+							      		<% } else { %>
+							      		$ 1500
+							      		<% }  %>
 							      	<% } else { %>
+							      		$ 0
 							      	<% } %>
 							      </td>
 							    </tr>
@@ -498,13 +508,18 @@
 							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組') { %>
 							      		<%= gradBookQuantity %>
 							      	<% } else { %>
+							      		0
 							      	<% } %>
 							      </td>
 							      <td class="center aligned">
 							      	<% if(gradBook === '套組＆預購禮' || gradBook === '套組') { %>
-							      		($ 400)</p>
+							      		<% if( gradBookQuantity === 1) { %>	
+							      		($ 400)
+							      		<% } else { %>
+							      		($ 800)
+							      		<% }  %>
 							      	<% } else { %>
-							      		( $ 0 )</p>
+							      		( $ 0 )
 							      	<% } %>
 							      </td>
 							    </tr>
@@ -533,7 +548,7 @@
 						<% if(gradBookPay === 'x' ) { %>
 							<div class="ui message">
 							  <div class="header">
-							    您還有 <%=gradBookTotal%> 未繳納
+							    您還有 $ <%=gradBookTotal%> 未繳納
 							  </div>
 							  <div class="content">
 							  	<h4>《匯款資訊》</h4>
@@ -611,7 +626,7 @@
 							    </tr>
 						  	</tbody>
 						</table>	
-						<div class="ui tablet stackable steps">
+						<div class="ui tablet stackable steps fluid">
 								<a href="http://ppt.cc/Vz9L" class="newWindow">
 								  <div class="step">
 								  	<a href="http://ppt.cc/Vz9L" class="newWindow"><div class="ui top red right corner label"><i class="download icon"></i></div></a>

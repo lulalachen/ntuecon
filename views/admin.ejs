@@ -35,6 +35,9 @@
 				$('.test.modal').modal('show');				
 				console.log('click2')
 			})
+			$('button .mini').click(function(){
+				alert('噢！呱呱！')
+			})
 		</script>
 		
 		<!-- LOCAL INFORMATION -->
@@ -48,7 +51,7 @@
 				  	<a class=" item" href="#">
 				    	<i class="treatment icon"></i> Q&A
 				  	</a>
-				  	<button class="btn btn-danger mini" type="button" on-click="alert('噢！呱呱')">
+				  	<button class="btn btn-danger mini" type="button" on-click="gogo">
 					  Unread <span class="badge"><%=count%></span>
 					</button>
 				  	<div class="right menu">
@@ -81,11 +84,12 @@
 				<table class="ui table striped">
 		            <thead>
 		            	<tr>
-			                <th>Name</th>
-			                <th>Student ID</th>
+			                <th class="two wide">Name</th>
+			                <th class=" collapsing">Student ID</th>
+			                <th>Contact</th>
 			                <th>Subject</th>
 			                <th>Comment</th>
-			                <th>Create Time</th>
+			                <th class="three wide">Create Time</th>
 			                <th>Read</th>
 		                </tr>
 		            </thead>
@@ -94,9 +98,10 @@
 		                <tr>
 		                    <td> <%= sug.name %> </td> 
 		                    <td> <%= sug.student_id %></td>
+		                    <td> <%= sug.contact  %></td>
 		                    <td> <%= sug.subject %> </td>
 		                    <td> <%= sug.comment %> </td>
-		                    <td> <%= sug.Date %> </td>
+		                    <td> <%= sug.Date.toDateString() %> </td>
 		                    <td>
 			                    <a href="/read/<%=sug._id%>">
 									<% if (sug.read) { %>
