@@ -147,9 +147,8 @@
 					$('suggestionModal').modal('hide')
 				})
 				</script>
+
 				<!-- Suggestion form -->
-				
-				  
 				<div class="ui top attached tabular menu">
 				    <a class="active item" id="團拍標籤">
 					    團拍
@@ -195,10 +194,10 @@
 			  		<% }) %>
 					</div>
 				</div>
-				<div class="ui bottom attached segment hidden" id="其他">
+				<div class="ui bottom attached segment hidden" id="上傳">
 					<div class="ui styled fluid accordion">
 					<% qa.forEach(function(qa){ %>
-						<% if (qa.category === '其他')  { %>
+						<% if (qa.category === '上傳')  { %>
 							<div class="active title" style="background-color:#D8D8D8">
 								<p style=""> <i class="dropdown icon"></i>
 								<%= qa.question %></p>
@@ -232,6 +231,7 @@
 					$('.active.item').removeClass('active')
 					$(this).addClass('active')
 				})
+				
 				$('#上傳標籤').click(function(){
 					$('.ui.segment').not('.hidden').addClass('hidden')
 					$('#上傳').removeClass('hidden')
@@ -255,9 +255,6 @@
 			</div>
 
 		</div>
-
-		<!-- Content Start Here -->
-		
 
 	</div>	
 </div>
