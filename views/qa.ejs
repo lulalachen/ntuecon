@@ -26,7 +26,7 @@
 
 		<div class="ui grid center aligned" style="padding-top:20px">
 			<div class="ui centered aligned">
-				<h1 class="ui header center aligned"><i class="ui icon anchor"></i> &nbsp;NTU Economics Ｑ＆Ａ</h1>
+				<h1 class="ui header center aligned"><i class="ui icon anchor"></i> &nbsp;NTU Economics Q&A</h1>
 				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;噢！ <%=name %>&nbsp; 你今天好嗎？</h4>
 				<form action="/search" method="post" class="hidden" id="keepName">
 					<input type="text" name='input' value="<%=name%>">
@@ -231,7 +231,7 @@
 					$('.active.item').removeClass('active')
 					$(this).addClass('active')
 				})
-				
+
 				$('#上傳標籤').click(function(){
 					$('.ui.segment').not('.hidden').addClass('hidden')
 					$('#上傳').removeClass('hidden')
