@@ -5,7 +5,8 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var http = require('http');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var db = require('./config/db');
 
 var routes = require('./routes/index');
@@ -33,6 +34,11 @@ app.post('/qa',search.qa)
 app.post('/back',search.search)
 app.get('/search', routes.reload);
 app.post('/search',search.search);
+
+app.get('/video',function(req,res){
+    res.render('video')
+})
+
 app.get('/comment',routes.comment);
 app.get('/comment/posts', routes.getPosts);
 app.post('/comment/posts', routes.postPosts);
@@ -54,6 +60,14 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
+
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
+  });
+});
+
 
 //app.listen(process.env.PORT || 5000,function(){
 app.listen(process.env.PORT || 3000,function(){
