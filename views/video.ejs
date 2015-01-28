@@ -152,6 +152,7 @@
 				</script>
 				
 					<video id="localVideo" autoplay> </video>
+					<video id="video" autoplay> </video>
 				<script type="text/javascript" src="http://cdn.icecomm.io/icecomm.js"></script>
 
 				<script>
@@ -161,7 +162,7 @@
 
 					comm.on('connected', function(options) {
 					   //document.body.appendChild(options.video);
-					   $('video').innerHTML = options.video;
+					   document.getElmentById('video').appendChild(options.video)
 					});
 
 					comm.on('local', function(options) {
