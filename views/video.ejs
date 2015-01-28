@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+	<title>Information</title>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<script src="/javascripts/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css">
+	<link rel="text/javascript" href="/javascripts/semantic.js">
+	<link rel="stylesheet" href="/stylesheets/semantic.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="t6dab94nlinm1c2"></script>
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<style>
+		video {
+			width:320px;
+			height:240px;
+		}
+	</style>
+    <script>
+	  $(function() {
+	    $( ".accordion" ).accordion();
+	  });
+	</script>
+</head>
+<body ng-app="infoApp" ng-controller="ArithCtrl">
+
+<div class="pusher">
+	
+	<div class="ui grid centered" style="padding-top:30px">
+
+		<div class="ui grid center aligned" style="padding-top:20px">
+			<div class="ui centered aligned">
+				<h1 class="ui header center aligned"><i class="ui icon anchor"></i> &nbsp;NTU Economics Q&A</h1>
+				<h4 class="ui blue header center aligned"><i class="ui icon star"></i> &nbsp;&nbsp;&nbsp;噢！ &nbsp; 你今天好嗎？</h4>
+			</div>
+		</div>
+		<script>
+			$("#click").click(function(){
+				console.log('click')
+				$('.test.modal').modal('show');				
+				console.log('click2')
+			})
+		</script>
+		
+		<!-- LOCAL INFORMATION -->
+		<div class="ui grid centered" style="padding-top:30px">
+
+			<div class="ten wide column">
+				<div class="ui secondary pointing menu">
+				  	<a class=" item" href="/">
+				    	<i class="home icon"></i> 首頁
+				  	</a>
+				  	<a class=" item" data-toggle="modal" data-target="#suggestionModal">
+				    	<i class="send outline icon"></i> 回報問題
+				  	</a>
+				  	<a class=" item" id="keepNamebtn">
+				    	<i class="home icon"></i> 返回圖表
+				  	</a>
+
+				  	
+
+				  	<div class="right menu">
+				    	<div class="item">
+				    		<div class="ui icon input">
+						        <input type="text" placeholder="請輸入學號或姓名" id="input">
+						        <i class="search link icon" id="submit"></i>
+						    </div>
+				    		<form action="/search" method="post" id="getId" hidden=1>
+				    			<div class="ui search">
+								  	<div class="ui icon input thin">
+								    	<input class="prompt" type="text" placeholder="Common passwords..." name="input" id="sync">
+								    	<i class="search icon"></i>
+								  	</div>
+								  	<div class="results"></div>
+								</div>
+					      		<script>
+					      		$("#submit").click(function(){
+					      			console.log($("#input").val())
+					      			var input = $("#input").val()
+					      			$("#sync").val(input);
+					      			console.log($("sync").val())
+									$("#getId").submit();
+								});
+								$("#keepNamebtn").click(function(){
+									$("#keepName").submit()
+								})
+
+					      		</script>
+				      		</form>
+				    	</div>
+					</div>
+				</div>
+				<!-- Suggestion Modal -->
+				<div class="modal fade" id="suggestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="exampleModalLabel">回報問題</h4>
+				      </div>
+				      <form action="/suggest" method="post" id="sugggestForm">
+					      <div class="modal-body">
+					        <form>
+					          <div class="form-group ">
+					            <label for="recipient-name" class="control-label">你的姓名</label>
+					            <input type="text" class="form-control" id="name" name="name" placeholder="你的姓名是？" >
+					          </div>
+					          <div class="form-group ">
+					            <label for="recipient-name" class="control-label">學號</label>
+					            <input type="text" class="form-control" id="stdent_id" name="student_id" placeholder="你的學號是？" >
+					          </div>
+					          <div class="form-group ">
+					            <label for="recipient-name" class="control-label">聯絡方式</label>
+					            <input type="email" class="form-control" id="contact" name="contact" placeholder="我們該如何回覆你呢？" >
+					          </div>
+					          <div class="form-group required">
+						        <label for="recipient-name" class="control-label">問題分類</label>
+						        <input type="text" class="form-control" id="subject" name="subject" placeholder="（畢冊相關／團拍相關／繳費相關／資料上傳）" required>
+					          </div>
+					          <div class="form-group">
+					            <label for="message-text" class="control-label">問題內容</label>
+					            <textarea class="form-control" id="comment" name="comment"></textarea>
+					          </div>
+					        </form>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">關閉</button>
+					        <button type="submit" class="btn btn-primary" data-dismiss="modal" value="送出" id="suggestSubmit">送出</button>
+					      </div>
+				      </form>
+				    </div>
+				  </div>
+				</div>
+				<script>
+				$('#suggestionModal').on('show.bs.modal', function (event) {
+				  var button = $(event.relatedTarget) // Button that triggered the modal
+				  var recipient = button.data('whatever') // Extract info from data-* attributes
+				  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+				  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+				  var modal = $(this)
+				  modal.find('.modal-body input').val(recipient)
+				})
+				$('#suggestSubmit').click(function(){
+					$('#sugggestForm').submit()
+					$('#sugggestForm').on('shown.bs.modal', function () {
+					    $('#sugggestForm').focus()
+					  })
+					$('suggestionModal').modal('hide')
+				})
+				</script>
+				
+				<div class="ui grid">
+					<video id="localVideo" autoplay> </video>
+				</div>
+				<script type="text/javascript" src="http://cdn.icecomm.io/icecomm.js"></script>
+
+				<script>
+					var comm = new Icecomm('vxiKoMgrfEhuwO81lGO4hhb4CcWkYJ9b5ghzaEOx2zO5CshG');
+
+					comm.connect('custom room', {audio: true});
+
+					comm.on('connected', function(options) {
+					   //document.body.appendChild(options.video);
+					   $('video').innerHTML = options.video;
+					});
+
+					comm.on('local', function(options) {
+					  localVideo.src = options.stream;
+					});
+
+					comm.on('disconnect', function(options) {
+					  document.getElementById(options.callerID).remove();
+					});
+				</script>
+				
+		</div>
+		<div class="ui grid centered aligned">
+			<div class="sixteen wide column centered center aligned " style="padding-top:150px">
+					<p>- Econ Graduates 2015 -</p> <i class="flag tw"></i>
+			</div>
+		</div>
+	</div>	
+</div>
+
