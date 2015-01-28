@@ -151,8 +151,10 @@
 				})
 				</script>
 				
-					<video id="localVideo" autoplay> </video>
-					<video id="video" autoplay> </video>
+					
+					<div id="remoteVideo" autoplay> 
+						<video id="localVideo" autoplay> </video>
+					</div>
 				<script type="text/javascript" src="http://cdn.icecomm.io/icecomm.js"></script>
 
 				<script>
@@ -161,8 +163,9 @@
 					comm.connect('custom room', {audio: true});
 
 					comm.on('connected', function(options) {
-					   //document.body.appendChild(options.video);
-					   document.getElmentById('video').appendChild(options.video)
+					   document.getElementById('remoteVideo').appendChild(options.video);
+					   console.log('connect')
+					   //console.log(options.video.attr('src'))
 					});
 
 					comm.on('local', function(options) {
