@@ -127,6 +127,15 @@
 		                </tr>
 		            </thead>
 		            <tbody>
+		            	<form action="/createQA" method="post" class="ui form">
+		                	<tr>
+			                    <td> <input type="text" name="question"> </td> 
+			                    <td> <input type="text" name="answer"> </td>
+			                    <td><input type="text" name="category"></td>
+			                    <td> <input type="text" name="que"> </td>
+			                    <td colspan=2> <button type="submit" class="ui button">Submit</button> </td>
+				            </tr>
+		                </form>
 	                	<% qa.forEach( function (qa){ %>
 		                <tr>
 		                    <td> <%=qa.question%></td>
@@ -137,15 +146,7 @@
 		                    <td> <a href="/deleteQA/<%=qa._id%>">Delete</a> </td>
 			            </tr>
 		                <% }); %>
-		                <form action="/createQA" method="post" class="ui form">
-		                	<tr>
-			                    <td> <input type="text" name="question"> </td> 
-			                    <td> <input type="text" name="answer"> </td>
-			                    <td><input type="text" name="category"></td>
-			                    <td> <input type="text" name="que"> </td>
-			                    <td colspan=2> <button type="submit" class="ui button">Submit</button> </td>
-				            </tr>
-		                </form>
+		                
 		            </tbody>
 	            </table>    
 			</div>

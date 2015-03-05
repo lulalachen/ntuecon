@@ -61,7 +61,7 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-app.listen(process.env.PORT || 80,function(err){
+app.listen(process.env.PORT || 3000,function(err){
     if(err) throw err
     console.log("Server start")
 })

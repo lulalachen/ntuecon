@@ -92,6 +92,8 @@ exports.search = function(req,res){
 								
 								groupShotPS			: rows[i][22],
 								groupTotal			: rows[i][23],
+								line25				: rows[i][25],
+								line26				: rows[i][26],
 								message : 'Hello' + rows[i][2]
 							})
 						}else{
