@@ -24,41 +24,7 @@
 		  width: 100%;
 		  height: 100px;
 		}
-
-		$('.ui.sticky')
-		  .sticky({
-		    context: '#context'
-		  })
-		;
-		$('.description')
-		  .popup({
-		    inline   : true,
-		    hoverable: true,
-		    position : 'bottom left',
-		    delay: {
-		      show: 300,
-		      hide: 800
-		    }
-		  })
-		;
 	</style>
-	<script>
-
-	$(function() {
-	  $('a[href*=#]:not([href=#])').click(function() {
-	    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-	      var target = $(this.hash);
-	      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-	      if (target.length) {
-	        $('html,body').animate({
-	          scrollTop: target.offset().top
-	        }, 1000);
-	        return false;
-	      }
-	    }
-	  });
-	});
-	</script>
 </head>
 <body ng-app="infoApp" ng-controller="ArithCtrl">
 <div class="pusher" id="top">
@@ -852,6 +818,37 @@
 </div>
 
 <script>
+
+		$('.ui.sticky')
+		  .sticky({
+		    context: '#context'
+		  })
+		;
+		$('.description')
+		  .popup({
+		    inline   : true,
+		    hoverable: true,
+		    position : 'bottom left',
+		    delay: {
+		      show: 300,
+		      hide: 800
+		    }
+		  })
+		;
+	$(function() {
+	  $('a[href*=#]:not([href=#])').click(function() {
+	    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+	      var target = $(this.hash);
+	      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+	      if (target.length) {
+	        $('html,body').animate({
+	          scrollTop: target.offset().top
+	        }, 1000);
+	        return false;
+	      }
+	    }
+	  });
+	});
 $('.launch.button').click(function(){
 		$('.left.demo.sidebar')
 		  .sidebar('toggle')

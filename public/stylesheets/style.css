@@ -108,6 +108,7 @@
 		/* Set your background with this */
 		background: #348cb2 url("/images/cover1.jpg") bottom left;
 		background-repeat: repeat-x;
+		back
 		height: 100%;
 		left: 0;
 		opacity: 1;
@@ -121,7 +122,7 @@
 	@keyframes bg { 0% { -moz-transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0); -o-transform: translate3d(0,0,0); -ms-transform: translate3d(0,0,0); transform: translate3d(0,0,0); } 100% { -moz-transform: translate3d(-1580px,0,0); -webkit-transform: translate3d(-1580px,0,0); -o-transform: translate3d(-1580px,0,0); -ms-transform: translate3d(-1580px,0,0); transform: translate3d(-1580px,0,0); } }
 
 	#bg {
-		background-size: 1580px;
+		background-size: cover;
 		width: 6750px;
 	}
 
