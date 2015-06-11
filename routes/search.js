@@ -34,7 +34,7 @@ exports.search = function(req,res){
 			// Choose from 1 of the 3 authentication methods:
 			//    1. Username and Password
 				username: 'lulalachen',
-				password: 'ntu231465',
+				password: process.env.Google_Password,
 				/*
 			// OR 2. OAuth
 			oauth : {
